@@ -31,14 +31,13 @@ public class PlayerController : MonoBehaviour
             switch (state)
             {
                 case CurrentAnimationState.IDLE:
-                    gameObject.GetComponent<Animation>().Play("Female|Run");
-                    //anim.Play("Female|Idle");
+                    gameObject.GetComponent<Animation>().Play("Female|Idle");
                     break;
                 case CurrentAnimationState.WALK:
-                    anim.Play("Walk");
+                    gameObject.GetComponent<Animation>().Play("Female|Walk");
                     break;
                 case CurrentAnimationState.RUN:
-                    anim.Play("Run");
+                    gameObject.GetComponent<Animation>().Play("Female|Run");
                     break;
             }
         }

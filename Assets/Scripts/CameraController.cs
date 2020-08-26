@@ -29,6 +29,7 @@ public class CameraController : MonoBehaviour
     {
         if (PlayerAlive == true)
         {
+            UpdateCameraPosition();
             if (Input.touchCount > 0)
             {
                 touch = Input.GetTouch(0);
@@ -56,7 +57,6 @@ public class CameraController : MonoBehaviour
     void UpdateCameraPosition()
     {
         transform.position = target.position + offset;
-        //transform.position = offset;
     }
 
 }
