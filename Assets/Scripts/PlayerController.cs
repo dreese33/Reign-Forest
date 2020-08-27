@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private CameraController controller;
     private CurrentAnimationState state;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
+    
     void Update()
     {
         if (controller.PlayerAlive == true) 
