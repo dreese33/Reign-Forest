@@ -22,6 +22,10 @@ public class CameraController : MonoBehaviour
     public bool PlayerAlive = true;
     public Transform target;
 
+    public bool cameraPerspectiveEnabled = true;
+
+    private Camera mainCamera;
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +33,7 @@ public class CameraController : MonoBehaviour
         UpdateCameraPosition();
         UpdateCameraAngleMobile();
         UpdateCameraAngleComputer();
+        mainCamera = Camera.main;
     }
 
 
@@ -38,19 +43,25 @@ public class CameraController : MonoBehaviour
         if (PlayerAlive == true)
         {
             UpdateCameraPosition();
-            if (Input.touchCount > 0)
+            if (cameraPerspectiveEnabled) 
             {
-                touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Moved) 
+                if (Input.touchCount > 0)
                 {
-                    UpdateCameraAngleMobile();
+                    touch = Input.GetTouch(0);
+                    if (touch.phase == TouchPhase.Moved) 
+                    {
+                        //Perform mobile updates here
+                        UpdateCameraAngleMobile();
+                    }
+                } else if (Input.GetKey(KeyCode.Mouse0))
+                {
+                        //Perform computer updates here
+                        UpdateCameraAngleComputer();
+                } else
+                {
+                    lastPos = Vector3.zero;
+                    return;
                 }
-            } else if (Input.GetKey(KeyCode.Mouse0))
-            {
-                    UpdateCameraAngleComputer();
-            } else
-            {
-                lastPos = Vector3.zero;
             }
         }
     }
