@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
@@ -12,11 +13,15 @@ public class PlayerController : MonoBehaviour
     private CameraController controller;
     private CurrentAnimationState state;
 
+    public Button forwardButton;
+    public GameObject character;
+    public float playerVelocity = 0.0f;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = gameObject.GetComponent<Animation>();
+        anim = character.GetComponent<Animation>();
         controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
         state = CurrentAnimationState.IDLE;
     }
@@ -34,15 +39,29 @@ public class PlayerController : MonoBehaviour
             switch (state)
             {
                 case CurrentAnimationState.IDLE:
-                    gameObject.GetComponent<Animation>().Play("Female|Idle");
+                    character.GetComponent<Animation>().Play("Female|Idle");
                     break;
                 case CurrentAnimationState.WALK:
-                    gameObject.GetComponent<Animation>().Play("Female|Walk");
+                    character.GetComponent<Animation>().Play("Female|Walk");
                     break;
                 case CurrentAnimationState.RUN:
-                    gameObject.GetComponent<Animation>().Play("Female|Run");
+                    character.GetComponent<Animation>().Play("Female|Run");
                     break;
             }
         }
+    }
+
+    
+    public void BeginForward()
+    {
+        anim.Stop();
+        state = CurrentAnimationState.RUN;
+    }
+
+
+    public void EndForward()
+    {
+        anim.Stop();
+        state = CurrentAnimationState.IDLE;
     }
 }

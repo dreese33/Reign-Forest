@@ -13,14 +13,12 @@ public class ScrollViewController : MonoBehaviour
 
     public void BeginDraging()
     {
-        Debug.Log("Drag began");
         controller.cameraPerspectiveEnabled = false;
     }
 
 
     public void EndDraging()
     {
-        Debug.Log("Drag Ended");
         controller.cameraPerspectiveEnabled = true;
     }
 }
