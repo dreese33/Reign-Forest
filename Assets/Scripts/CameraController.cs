@@ -10,6 +10,7 @@ public class CameraController : MonoBehaviour
     private Vector3 lastPos = Vector3.zero;
 
     private Touch touch;
+    private int totalTouchCount;
 
     public float rotateSpeedMobile = 3.0f;
     public float rotateSpeedComputer = 10.0f;
@@ -48,11 +49,14 @@ public class CameraController : MonoBehaviour
             {
                 if (Input.touchCount > 0)
                 {
-                    touch = Input.GetTouch(0);
-                    if (touch.phase == TouchPhase.Moved) 
-                    {
-                        //Perform mobile updates here
-                        UpdateCameraAngleMobile();
+                    totalTouchCount = Mathf.Clamp(Input.touchCount, 1, 2);
+                    for (int i = 0; i < totalTouchCount; i++) {
+                        touch = Input.GetTouch(i);
+                        if (touch.phase == TouchPhase.Moved && !IsPointerOverUIObject()) 
+                        {
+                            //Perform mobile updates here
+                            UpdateCameraAngleMobile();
+                        }
                     }
                 } else if (Input.GetKey(KeyCode.Mouse0))
                 {
@@ -65,6 +69,14 @@ public class CameraController : MonoBehaviour
                 }
             }
         }
+    }
+
+
+    private bool IsPointerOverUIObject() {
+        //Implementation for mobile
+        return EventSystem.current.IsPointerOverGameObject(touch.fingerId);
+        //Implementation for computer
+        //return EventSystem.current.IsPointerOverGameObject();
     }
 
 
