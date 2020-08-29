@@ -1002,7 +1002,7 @@ MonoBehaviour:
   invertPitch: 1
   deltaOffset: 0.01
   PlayerAlive: 1
-  target: {fileID: 1687811137}
+  target: {fileID: 1649291922}
   cameraPerspectiveEnabled: 1
 --- !u!1 &1093199076
 GameObject:
@@ -1180,6 +1180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardButton: {fileID: 1398098471}
   character: {fileID: 223974226}
+  playerVelocity: 0
 --- !u!114 &1398098475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1210,22 +1211,6 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1398098474}
-          m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-          m_MethodName: EndForward
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -1489,9 +1474,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 840b50ceb76cfc04daf9759b40a113ae, type: 3}
---- !u!4 &1687811137 stripped
+--- !u!4 &1649291922 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 6250190495565672215, guid: 840b50ceb76cfc04daf9759b40a113ae, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5165808582897395409, guid: 840b50ceb76cfc04daf9759b40a113ae, type: 3}
   m_PrefabInstance: {fileID: 1649291921}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1703682123

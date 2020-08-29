@@ -17,7 +17,8 @@ public class CameraController : MonoBehaviour
     public float deltaOffset = 0.01f;
 
     private float pitch, yaw = 0.0f;
-    public readonly Vector3 offset = new Vector3(0.0f, 17.5f, 3.0f);
+
+    public readonly Vector3 offset = new Vector3(0.0f, 0.0f, 3.0f);
 
     public bool PlayerAlive = true;
     public Transform target;
