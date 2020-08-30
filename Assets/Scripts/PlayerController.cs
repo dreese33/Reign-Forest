@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public GameObject character;
     public float playerVelocity = 0.0f;
     public float speed = 100.0f;
+    public bool forwardPressed = false;
 
 
     // Start is called before the first frame update
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
     
     public void BeginForward()
     {
+        forwardPressed = true;
         anim.Stop();
         state = CurrentAnimationState.RUN;
     }
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
     public void EndForward()
     {
+        forwardPressed = false;
         anim.Stop();
         state = CurrentAnimationState.IDLE;
     }
