@@ -5,6 +5,10 @@ using UnityEngine;
 public class TerrainController : MonoBehaviour
 {
 
+    //To fix bug tomorrow try to use:
+    //https://answers.unity.com/questions/538769/change-and-add-terrain-texture-during-runtime.html
+
+
     public Terrain terrain;
     private Terrain frontTerrain;
     private GameObject terrainObj;
@@ -38,13 +42,6 @@ public class TerrainController : MonoBehaviour
 
     void AddNewTerrain()
     {
-        /*if (frontTerrain == null)
-        {
-            terrainCount++;
-            CreateNewTerrain();
-            return;
-        }*/
-
         terrainCount++;
         CreateNewTerrain();
 
@@ -52,19 +49,6 @@ public class TerrainController : MonoBehaviour
         {
             DestroyTerrain();
         }
-
-        //Questionable code here
-        /*
-        if (terrainCount > 1)
-        {
-            Destroy(frontTerrain);
-            terrain.terrainData = frontTerrain.terrainData;
-            frontTerrain = null;
-        } else
-        {
-            terrain.terrainData = frontTerrain.terrainData;
-            frontTerrain = null;
-        }*/
     }
 
 
@@ -73,18 +57,15 @@ public class TerrainController : MonoBehaviour
         //Set front terrain to terrain
         terrainObj = new GameObject("TerrainObj" + terrainCount);
  
-        TerrainData _TerrainData = new TerrainData();
+        TerrainData terrainData = new TerrainData();
         
-        _TerrainData.size = new Vector3(100, 600, 1000);
-        //_TerrainData.heightmapResolution = 100;
-        //_TerrainData.baseMapResolution = 100;
-       // _TerrainData.SetDetailResolution(100, 16);
+        terrainData.size = new Vector3(100, 600, 1000);
         
         TerrainCollider terrainCollider = terrainObj.AddComponent<TerrainCollider>();
         Terrain newTerrain = terrainObj.AddComponent<Terrain>();
         
-        terrainCollider.terrainData = _TerrainData;
-        newTerrain.terrainData = _TerrainData;
+        terrainCollider.terrainData = terrainData;
+        newTerrain.terrainData = terrainData;
         frontTerrain = newTerrain;
 
         Vector3 terrainPos = terrainObj.transform.position;
