@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public Button forwardButton;
     public GameObject character;
     public float playerVelocity = 0.0f;
-    public float speed = 150.0f;
+    public float speed = 100.0f;
 
 
     // Start is called before the first frame update
@@ -33,11 +33,6 @@ public class PlayerController : MonoBehaviour
     {
         if (controller.PlayerAlive == true) 
         {
-            /*
-            if (anim.isPlaying) {
-                
-                return;
-            }*/
             Vector3 pos = character.transform.position;
 
             switch (state)
@@ -50,7 +45,7 @@ public class PlayerController : MonoBehaviour
                     break;
                 case CurrentAnimationState.RUN:
                     character.GetComponent<Animation>().Play("Female|Run");
-                    pos.z += speed * (Time.deltaTime + 0.01f);
+                    pos.z += speed * Time.deltaTime;
                     character.transform.position = pos;
                     break;
             }
