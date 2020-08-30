@@ -332,6 +332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrain: {fileID: 184629185}
+  terrainCount: 0
 --- !u!1 &186685809
 GameObject:
   m_ObjectHideFlags: 0
