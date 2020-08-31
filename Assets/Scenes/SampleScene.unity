@@ -1314,8 +1314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardButton: {fileID: 1398098471}
   character: {fileID: 223974226}
-  playerVelocity: 0
-  speed: 150
+  speed: 200
   forwardPressed: 0
 --- !u!114 &1398098475
 MonoBehaviour:

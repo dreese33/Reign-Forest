@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
 
     public Button forwardButton;
     public GameObject character;
-    public float playerVelocity = 0.0f;
     public float speed = 100.0f;
     public bool forwardPressed = false;
 
