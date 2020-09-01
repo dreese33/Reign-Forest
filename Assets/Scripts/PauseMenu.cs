@@ -10,10 +10,13 @@ public class PauseMenu : MonoBehaviour
     public Button pauseButton;
     public Button resumeButton;
     public GameObject pauseMenuUI;
+    public GameObject gameUI;
     public bool gameIsPaused = false;
     public Camera menuCamera;
     public Camera mainCamera;
     public GameObject character;
+
+    private float distance = 20.0f;
 
     void Start()
     {
@@ -27,6 +30,8 @@ public class PauseMenu : MonoBehaviour
     {
         if (!gameIsPaused)
         {
+            gameUI.SetActive(false);
+
             pauseMenuUI.SetActive(true);
             Time.timeScale = 0f;
             gameIsPaused = true;
@@ -52,13 +57,15 @@ public class PauseMenu : MonoBehaviour
         menuCamera.depth -= 1;
         mainCamera.GetComponent<AudioListener>().enabled = true;
         menuCamera.GetComponent<AudioListener>().enabled = false;
+
+        gameUI.SetActive(true);
     }
 
 
     void UpdatePauseMenuLocation()
     {
-        pauseMenuUI.transform.position = mainCamera.transform.position + mainCamera.transform.forward * 15.0f;
-        pauseMenuUI.transform.rotation = new Quaternion( 0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
+        pauseMenuUI.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
         pauseMenuUI.transform.eulerAngles = mainCamera.transform.eulerAngles;
+        pauseMenuUI.transform.position = mainCamera.transform.position + mainCamera.transform.forward * distance;
     }
 }

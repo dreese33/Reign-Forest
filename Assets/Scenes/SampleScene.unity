@@ -826,6 +826,7 @@ MonoBehaviour:
   pauseButton: {fileID: 320902153}
   resumeButton: {fileID: 596189122}
   pauseMenuUI: {fileID: 1669378052}
+  gameUI: {fileID: 1619069181}
   gameIsPaused: 0
   menuCamera: {fileID: 168647063}
   mainCamera: {fileID: 963194227}
@@ -866,7 +867,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -68.2}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &596189122
@@ -983,10 +984,10 @@ RectTransform:
   m_Father: {fileID: 1669378056}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.1, y: 0.1}
-  m_AnchorMax: {x: 0.9, y: 0.9}
+  m_AnchorMin: {x: 0.9, y: 0.1}
+  m_AnchorMax: {x: 0.1, y: 0.9}
   m_AnchoredPosition: {x: -1.3301086, y: 0.017974854}
-  m_SizeDelta: {x: 191.20001, y: 108}
+  m_SizeDelta: {x: 351.2, y: 108}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &656984003
 MonoBehaviour:
@@ -1001,7 +1002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.02745098, g: 0.043137256, b: 0.20392157, a: 0.19607843}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2022,8 +2023,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.1, y: 0.9}
-  m_AnchorMax: {x: 0.9, y: 0.1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
