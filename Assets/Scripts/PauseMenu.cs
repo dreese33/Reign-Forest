@@ -62,5 +62,7 @@ public class PauseMenu : MonoBehaviour
         Vector3 pos = mainCamera.transform.position;
         pos.z += posZOffset;
         pauseMenuUI.transform.position = pos;
+
+        pauseMenuUI.transform.rotation = mainCamera.transform.rotation;
     }
 }

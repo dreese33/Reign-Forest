@@ -15,6 +15,6 @@ public class PauseMenuController : MonoBehaviour
 
         float sizeX = screenSize.x / rt.rect.width;
         float sizeY = screenSize.y / rt.rect.height;
-        rt.localScale = new Vector3(sizeX * 0.8f, sizeY * 0.8f, 1);
+        rt.localScale = new Vector3(sizeX * 0.8f, sizeY * 0.5f, 1);
     }
 }
