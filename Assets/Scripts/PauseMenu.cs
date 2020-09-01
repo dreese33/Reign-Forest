@@ -16,7 +16,7 @@ public class PauseMenu : MonoBehaviour
     public Camera mainCamera;
     public GameObject character;
 
-    private float distance = 20.0f;
+    private float distance = 25.0f;
 
     void Start()
     {
@@ -68,4 +68,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.transform.eulerAngles = mainCamera.transform.eulerAngles;
         pauseMenuUI.transform.position = mainCamera.transform.position + mainCamera.transform.forward * distance;
     }
+
+
+
 }
