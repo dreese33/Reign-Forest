@@ -59,10 +59,17 @@ public class PauseMenu : MonoBehaviour
 
     void UpdatePauseMenuLocation()
     {
-        Vector3 pos = mainCamera.transform.position;
-        pos.z += posZOffset;
-        pauseMenuUI.transform.position = pos;
+        //Vector3 pos = mainCamera.transform.position;
+       // pos.z += posZOffset;
+        //pauseMenuUI.transform.position = pos;
 
-        pauseMenuUI.transform.rotation = mainCamera.transform.rotation;
+        //pauseMenuUI.transform.rotation = mainCamera.transform.rotation;
+        //pauseMenuUI.transform.eulerAngles = mainCamera.transform.eulerAngles;
+        pauseMenuUI.transform.position = mainCamera.transform.position + mainCamera.transform.forward * 15.0f;
+        pauseMenuUI.transform.rotation = new Quaternion( 0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
+        pauseMenuUI.transform.eulerAngles = mainCamera.transform.eulerAngles;
     }
+
+
+    
 }
