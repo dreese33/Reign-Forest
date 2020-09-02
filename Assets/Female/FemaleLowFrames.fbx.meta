@@ -15,6 +15,9 @@ ModelImporter:
   - first:
       74: -5367593271522349197
     second: Female|Walk
+  - first:
+      74: -3046432829057533656
+    second: Female|Gun
   externalObjects: {}
   materials:
     materialImportMode: 1

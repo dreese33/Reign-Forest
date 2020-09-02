@@ -27,6 +27,8 @@ public class CameraController : MonoBehaviour
     public bool cameraPerspectiveEnabled = true;
 
     private Camera mainCamera;
+    public GameObject gun;
+    private readonly float gunOffset = 5.0f;
 
 
     // Start is called before the first frame update
@@ -47,6 +49,7 @@ public class CameraController : MonoBehaviour
             UpdateCameraPosition();
             if (cameraPerspectiveEnabled) 
             {
+                UpdateGunPosition();
                 if (Input.touchCount > 0)
                 {
                     totalTouchCount = Mathf.Clamp(Input.touchCount, 1, 2);
@@ -116,5 +119,13 @@ public class CameraController : MonoBehaviour
     void UpdateCameraPosition()
     {
         transform.position = target.position + offset;
+    }
+
+
+    void UpdateGunPosition()
+    {
+        gun.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
+        gun.transform.position = mainCamera.transform.position + gunOffset * mainCamera.transform.forward;
+        gun.transform.eulerAngles = new Vector3(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y - 90.0f, mainCamera.transform.eulerAngles.z);
     }
 }
