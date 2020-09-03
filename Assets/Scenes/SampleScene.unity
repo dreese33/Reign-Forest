@@ -1071,7 +1071,6 @@ MonoBehaviour:
   gameIsPaused: 0
   menuCamera: {fileID: 168647063}
   mainCamera: {fileID: 963194227}
-  character: {fileID: 223974226}
 --- !u!1 &525429007 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 8ec27b9fa858cc6428814a59ea18bd18, type: 3}

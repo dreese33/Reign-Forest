@@ -14,7 +14,7 @@ public class PauseMenu : MonoBehaviour
     public bool gameIsPaused = false;
     public Camera menuCamera;
     public Camera mainCamera;
-    public GameObject character;
+    //private PlayerController character;
 
     private float distance = 25.0f;
 
