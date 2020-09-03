@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
+public enum CharacterType {
+    MALE,
+    FEMALE
+}
+
 public class CameraController : MonoBehaviour
 {
 
@@ -22,7 +28,12 @@ public class CameraController : MonoBehaviour
     public readonly Vector3 offset = new Vector3(0.0f, 0.0f, 3.0f);
 
     public bool PlayerAlive = true;
-    public Transform target;
+    public GameObject maleCharacter;
+    public GameObject femaleCharacter;
+    public Transform femaleTarget;
+    public Transform maleTarget;
+    private Transform gameTarget;
+    public CharacterType gender;
 
     public bool cameraPerspectiveEnabled = true;
 
@@ -34,6 +45,10 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Manually set character type here
+        gender = CharacterType.MALE;
+        SetupMainCharacter();
+
         UpdateCameraPosition();
         UpdateCameraAngleMobile();
         UpdateCameraAngleComputer();
@@ -118,7 +133,7 @@ public class CameraController : MonoBehaviour
     //This code should be executed in the Player class
     void UpdateCameraPosition()
     {
-        transform.position = target.position + offset;
+        transform.position = gameTarget.position + offset;
     }
 
 
@@ -126,6 +141,44 @@ public class CameraController : MonoBehaviour
     {
         gun.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
         gun.transform.position = mainCamera.transform.position + gunOffset * mainCamera.transform.forward;
-        gun.transform.eulerAngles = new Vector3(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y - 90.0f, mainCamera.transform.eulerAngles.z);
+        gun.transform.eulerAngles = mainCamera.transform.eulerAngles;
+    }
+
+
+    void SetupMainCharacter()
+    {
+        switch (gender)
+        {
+            case CharacterType.FEMALE:
+                CenterGameTargetFemale();
+                break;
+            case CharacterType.MALE:
+                CenterGameTargetMale();
+                break;
+        }
+    }
+
+
+    void CenterGameTargetMale()
+    {
+        gameTarget = maleTarget;
+        femaleCharacter.SetActive(false);
+        maleCharacter.SetActive(true);
+
+        Vector3 pos = maleCharacter.transform.position;
+        pos.x = 50;
+        maleCharacter.transform.position = pos;
+    }
+
+
+    void CenterGameTargetFemale()
+    {
+        gameTarget = femaleTarget;
+        maleCharacter.SetActive(false);
+        femaleCharacter.SetActive(true);
+
+        Vector3 pos = femaleCharacter.transform.position;
+        pos.x = 50;
+        femaleCharacter.transform.position = pos;
     }
 }
