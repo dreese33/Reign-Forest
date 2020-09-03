@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Animation anim;
     private CameraController controller;
     private CurrentAnimationState state;
+    private string genderAnimationString;
 
     public Button forwardButton;
     public GameObject character;
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CharacterSelect();
+
         anim = character.GetComponent<Animation>();
         controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
         state = CurrentAnimationState.IDLE;
@@ -38,13 +41,13 @@ public class PlayerController : MonoBehaviour
             switch (state)
             {
                 case CurrentAnimationState.IDLE:
-                    character.GetComponent<Animation>().Play("Female|Idle");
+                    character.GetComponent<Animation>().Play(genderAnimationString + "|Idle");
                     break;
                 case CurrentAnimationState.WALK:
-                    character.GetComponent<Animation>().Play("Female|Walk");
+                    character.GetComponent<Animation>().Play(genderAnimationString + "|Walk");
                     break;
                 case CurrentAnimationState.RUN:
-                    character.GetComponent<Animation>().Play("Female|Run");
+                    character.GetComponent<Animation>().Play(genderAnimationString + "|Run");
                     pos.z += speed * Time.deltaTime;
                     character.transform.position = pos;
                     break;
@@ -66,5 +69,21 @@ public class PlayerController : MonoBehaviour
         forwardPressed = false;
         anim.Stop();
         state = CurrentAnimationState.IDLE;
+    }
+
+
+    private void CharacterSelect()
+    {
+        switch (CameraController.gender)
+        {
+            case CharacterType.MALE:
+                character = GameObject.Find("MaleLowQuality");
+                genderAnimationString = "Male_game_character";
+                break;
+            case CharacterType.FEMALE:
+                character = GameObject.Find("FemaleLowFrames");
+                genderAnimationString = "Female";
+                break;
+        }
     }
 }

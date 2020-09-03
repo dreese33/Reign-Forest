@@ -33,7 +33,9 @@ public class CameraController : MonoBehaviour
     public Transform femaleTarget;
     public Transform maleTarget;
     private Transform gameTarget;
-    public CharacterType gender;
+
+    //STATIC variable beware
+    public static CharacterType gender = CharacterType.MALE;
 
     public bool cameraPerspectiveEnabled = true;
 
@@ -46,7 +48,6 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         //Manually set character type here
-        gender = CharacterType.MALE;
         SetupMainCharacter();
 
         UpdateCameraPosition();

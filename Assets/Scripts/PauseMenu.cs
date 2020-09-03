@@ -68,7 +68,4 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.transform.eulerAngles = mainCamera.transform.eulerAngles;
         pauseMenuUI.transform.position = mainCamera.transform.position + mainCamera.transform.forward * distance;
     }
-
-
-
 }

@@ -1903,6 +1903,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 703e4caf40db8024788f835aaca8d5b6, type: 3}
   m_PrefabInstance: {fileID: 1350862829}
   m_PrefabAsset: {fileID: 0}
+--- !u!111 &897643439
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897643438}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 3136311877845059658, guid: 703e4caf40db8024788f835aaca8d5b6, type: 3}
+  - {fileID: -7859235015738125930, guid: 703e4caf40db8024788f835aaca8d5b6, type: 3}
+  - {fileID: -7043893261824982584, guid: 703e4caf40db8024788f835aaca8d5b6, type: 3}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2008,7 +2026,6 @@ MonoBehaviour:
   femaleCharacter: {fileID: 223974226}
   femaleTarget: {fileID: 1649291922}
   maleTarget: {fileID: 239410290}
-  gender: 0
   cameraPerspectiveEnabled: 1
   gun: {fileID: 525429007}
 --- !u!1 &969445412
