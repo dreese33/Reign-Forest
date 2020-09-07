@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
                     character.GetComponent<Animation>().Play(genderAnimationString + "|Run");
                     pos.z += speed * Time.deltaTime;
                     character.transform.position = pos;
+                    controller.UpdateCameraPosition();
+                    controller.UpdateGunPosition();
                     break;
             }
         }
@@ -66,9 +68,9 @@ public class PlayerController : MonoBehaviour
 
     public void EndForward()
     {
-        forwardPressed = false;
         anim.Stop();
         state = CurrentAnimationState.IDLE;
+        forwardPressed = false;
     }
 
 

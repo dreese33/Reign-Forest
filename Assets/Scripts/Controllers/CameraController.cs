@@ -32,14 +32,14 @@ public class CameraController : MonoBehaviour
     public GameObject femaleCharacter;
     public Transform femaleTarget;
     public Transform maleTarget;
-    private Transform gameTarget;
+    public Transform gameTarget;
 
     //STATIC variable beware
     public static CharacterType gender = CharacterType.FEMALE;
 
     public bool cameraPerspectiveEnabled = true;
 
-    private Camera mainCamera;
+    public Camera mainCamera;
     public GameObject gun;
     private readonly float gunOffset = 5.0f;
 
@@ -62,7 +62,7 @@ public class CameraController : MonoBehaviour
     {
         if (PlayerAlive == true)
         {
-            UpdateCameraPosition();
+            //UpdateCameraPosition();
             if (cameraPerspectiveEnabled) 
             {
                 UpdateGunPosition();
@@ -130,15 +130,13 @@ public class CameraController : MonoBehaviour
     }
 
 
-    //This is currently setup for the female character only
-    //This code should be executed in the Player class
-    void UpdateCameraPosition()
+    public void UpdateCameraPosition()
     {
         transform.position = gameTarget.position + offset;
     }
 
 
-    void UpdateGunPosition()
+    public void UpdateGunPosition()
     {
         gun.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y - 90.0f, 0.0f, mainCamera.transform.rotation.w);
         gun.transform.position = mainCamera.transform.position + gunOffset * mainCamera.transform.forward;
