@@ -39,6 +39,7 @@ public class PauseMenu : MonoBehaviour
             UpdatePauseMenuLocation();
 
             menuCamera.depth += 1;
+            mainCamera.depth -= 1;
             mainCamera.GetComponent<AudioListener>().enabled = false;
             menuCamera.GetComponent<AudioListener>().enabled = true;
 
@@ -55,6 +56,7 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = false;
 
         menuCamera.depth -= 1;
+        mainCamera.depth += 1;
         mainCamera.GetComponent<AudioListener>().enabled = true;
         menuCamera.GetComponent<AudioListener>().enabled = false;
 

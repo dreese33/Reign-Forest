@@ -65,7 +65,9 @@ public class CameraController : MonoBehaviour
             //UpdateCameraPosition();
             if (cameraPerspectiveEnabled) 
             {
+                UpdateCameraPosition();
                 UpdateGunPosition();
+                //UpdateCameraPosition();
                 if (Input.touchCount > 0)
                 {
                     totalTouchCount = Mathf.Clamp(Input.touchCount, 1, 2);

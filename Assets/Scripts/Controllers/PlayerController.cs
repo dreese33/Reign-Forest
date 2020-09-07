@@ -68,9 +68,9 @@ public class PlayerController : MonoBehaviour
 
     public void EndForward()
     {
+        forwardPressed = false;
         anim.Stop();
         state = CurrentAnimationState.IDLE;
-        forwardPressed = false;
     }
 
 
