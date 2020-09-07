@@ -140,9 +140,24 @@ public class CameraController : MonoBehaviour
 
     void UpdateGunPosition()
     {
-        gun.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
+        //gun.transform.rotation = new Quaternion(mainCamera.transform.rotation.x, mainCamera.transform.rotation.y, mainCamera.transform.rotation.z, mainCamera.transform.rotation.w);
         gun.transform.position = mainCamera.transform.position + gunOffset * mainCamera.transform.forward;
-        gun.transform.eulerAngles = mainCamera.transform.eulerAngles;
+
+        Vector3 eulerAngles = mainCamera.transform.eulerAngles;
+
+        if (pitch == 0)
+        {
+            pitch += deltaOffset;
+        } else if (yaw == 0)
+        {
+            yaw += deltaOffset;
+        }
+
+        //eulerAngles.x -= 90.0f * Mathf.Atan(yaw / pitch);
+        //eulerAngles.y -= 90.0f * Mathf.Atan(pitch / yaw);
+        eulerAngles.y -= 90.0f;
+        eulerAngles.x = 0.0f;
+        gun.transform.eulerAngles = eulerAngles;
     }
 
 
