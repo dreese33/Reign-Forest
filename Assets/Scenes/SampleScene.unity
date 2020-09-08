@@ -2888,6 +2888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireButton: {fileID: 1647040251}
+  laserNoise1: {fileID: 8300000, guid: 28b5017c95927b041ba5fddad7e313ac, type: 3}
 --- !u!114 &1647040251
 MonoBehaviour:
   m_ObjectHideFlags: 0
