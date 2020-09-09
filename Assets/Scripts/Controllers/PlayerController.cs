@@ -41,13 +41,13 @@ public class PlayerController : MonoBehaviour
             switch (state)
             {
                 case CurrentAnimationState.IDLE:
-                    character.GetComponent<Animation>().Play(genderAnimationString + "|Idle");
+                    anim.Play(genderAnimationString + "|Idle");
                     break;
                 case CurrentAnimationState.WALK:
-                    character.GetComponent<Animation>().Play(genderAnimationString + "|Walk");
+                    anim.Play(genderAnimationString + "|Walk");
                     break;
                 case CurrentAnimationState.RUN:
-                    character.GetComponent<Animation>().Play(genderAnimationString + "|Run");
+                    anim.Play(genderAnimationString + "|Run");
                     pos.z += speed * Time.deltaTime;
                     character.transform.position = pos;
                     controller.UpdateCameraPosition();

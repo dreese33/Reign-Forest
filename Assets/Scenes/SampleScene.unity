@@ -1076,6 +1076,42 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 8ec27b9fa858cc6428814a59ea18bd18, type: 3}
   m_PrefabInstance: {fileID: 651989765}
   m_PrefabAsset: {fileID: 0}
+--- !u!111 &525429008
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525429007}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 4594285501ce6fb4a86c2eedca26499d, type: 2}
+  - {fileID: 7400000, guid: fb9ada1f0db76c044b1f910b7d49120f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &525429009
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525429007}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 92f2e8bbfa977a541a5327ce2fdb3138, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &596189120
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,9 +1300,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 8ec27b9fa858cc6428814a59ea18bd18, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 8ec27b9fa858cc6428814a59ea18bd18, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6dec1327f25a3b74bb0fbe301b9cd40b, type: 2}
+    - target: {fileID: 9500000, guid: 8ec27b9fa858cc6428814a59ea18bd18, type: 3}
+      propertyPath: m_CullingMode
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9500000, guid: 8ec27b9fa858cc6428814a59ea18bd18, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8ec27b9fa858cc6428814a59ea18bd18, type: 3}
 --- !u!1 &656984001
 GameObject:
@@ -2889,6 +2934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireButton: {fileID: 1647040251}
   laserNoise1: {fileID: 8300000, guid: 28b5017c95927b041ba5fddad7e313ac, type: 3}
+  gun: {fileID: 525429007}
 --- !u!114 &1647040251
 MonoBehaviour:
   m_ObjectHideFlags: 0
