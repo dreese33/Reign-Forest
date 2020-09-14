@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 public enum CharacterType {
@@ -49,6 +50,10 @@ public class CameraController : MonoBehaviour
     private int maxCameraRotationY = 30;
 
 
+    public Button targetButton;
+    private float initialTargetButtonYAnchor;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +66,9 @@ public class CameraController : MonoBehaviour
         mainCamera = Camera.main;
 
         UpdateGunPosition();
+
+        initialTargetButtonYAnchor = 50f;
+        UpdateTargetPosition(pitch);
     }
 
 
@@ -94,6 +102,7 @@ public class CameraController : MonoBehaviour
                         UpdateGunPosition();
                 } else
                 {
+                    UpdateGunPosition();
                     lastPos = Vector3.zero;
                     return;
                 }
@@ -117,6 +126,9 @@ public class CameraController : MonoBehaviour
 
         pitch = Mathf.Clamp(pitch, minCameraRotationY, maxCameraRotationY);
         yaw = Mathf.Clamp(yaw, minCameraRotationX, maxCameraRotationX);
+
+        UpdateTargetPosition(pitch);
+
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
     }
 
@@ -135,6 +147,9 @@ public class CameraController : MonoBehaviour
 
         pitch = Mathf.Clamp(pitch, minCameraRotationY, maxCameraRotationY);
         yaw = Mathf.Clamp(yaw, minCameraRotationX, maxCameraRotationX);
+
+        UpdateTargetPosition(pitch);
+
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
 
         lastPos += mousePos;
@@ -194,5 +209,13 @@ public class CameraController : MonoBehaviour
         Vector3 pos = femaleCharacter.transform.position;
         pos.x = 50;
         femaleCharacter.transform.position = pos;
+    }
+
+
+    void UpdateTargetPosition(float pitch)
+    {
+        Vector2 anchorPos = targetButton.GetComponent<RectTransform>().anchoredPosition;
+        anchorPos.y = pitch * 1.2f + initialTargetButtonYAnchor;
+        targetButton.GetComponent<RectTransform>().anchoredPosition = anchorPos;
     }
 }
