@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
     private int totalTouchCount;
 
     public float rotateSpeedMobile = 3.0f;
-    public float rotateSpeedComputer = 10.0f;
+    public float rotateSpeedComputer = 20.0f;
     public float invertPitch = 1.0f;
     public float deltaOffset = 0.01f;
 
@@ -43,6 +43,11 @@ public class CameraController : MonoBehaviour
     public GameObject gun;
     private readonly float gunOffset = 5.0f;
 
+    private int minCameraRotationX = -60;
+    private int maxCameraRotationX = 60;
+    private int minCameraRotationY = -10;
+    private int maxCameraRotationY = 30;
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +59,8 @@ public class CameraController : MonoBehaviour
         UpdateCameraAngleMobile();
         UpdateCameraAngleComputer();
         mainCamera = Camera.main;
+
+        UpdateGunPosition();
     }
 
 
@@ -64,8 +71,6 @@ public class CameraController : MonoBehaviour
         {
             if (cameraPerspectiveEnabled) 
             {
-                UpdateCameraPosition();
-                UpdateGunPosition();
                 if (Input.touchCount > 0)
                 {
                     totalTouchCount = Mathf.Clamp(Input.touchCount, 1, 2);
@@ -74,6 +79,9 @@ public class CameraController : MonoBehaviour
                         if (touch.phase == TouchPhase.Moved && !IsPointerOverUIObject()) 
                         {
                             //Perform mobile updates here
+                            UpdateCameraPosition();
+                            UpdateGunPosition();
+                            
                             UpdateCameraAngleMobile();
                         }
                     }
@@ -81,6 +89,9 @@ public class CameraController : MonoBehaviour
                 {
                         //Perform computer updates here
                         UpdateCameraAngleComputer();
+
+                        UpdateCameraPosition();
+                        UpdateGunPosition();
                 } else
                 {
                     lastPos = Vector3.zero;
@@ -104,8 +115,8 @@ public class CameraController : MonoBehaviour
         pitch -= touch.deltaPosition.y * rotateSpeedMobile * invertPitch * Time.deltaTime;
         yaw += touch.deltaPosition.x * rotateSpeedMobile * invertPitch * Time.deltaTime;
 
-        pitch = Mathf.Clamp(pitch, -60, 60);
-        yaw = Mathf.Clamp(yaw, -60, 60);
+        pitch = Mathf.Clamp(pitch, minCameraRotationY, maxCameraRotationY);
+        yaw = Mathf.Clamp(yaw, minCameraRotationX, maxCameraRotationX);
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
     }
 
@@ -122,8 +133,8 @@ public class CameraController : MonoBehaviour
         pitch -= mousePos.y * rotateSpeedComputer * invertPitch * (Time.deltaTime + deltaOffset);
         yaw += mousePos.x * rotateSpeedComputer * invertPitch * (Time.deltaTime + deltaOffset);
 
-        pitch = Mathf.Clamp(pitch, -60, 60);
-        yaw = Mathf.Clamp(yaw, -60, 60);
+        pitch = Mathf.Clamp(pitch, minCameraRotationY, maxCameraRotationY);
+        yaw = Mathf.Clamp(yaw, minCameraRotationX, maxCameraRotationX);
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
 
         lastPos += mousePos;
@@ -143,7 +154,7 @@ public class CameraController : MonoBehaviour
 
         Vector3 eulerAngles = mainCamera.transform.eulerAngles;
         eulerAngles.x = 0.0f;
-        eulerAngles.y -= 90.0f;
+        eulerAngles.y -= 70.0f;
         gun.transform.eulerAngles = eulerAngles;
     }
 
