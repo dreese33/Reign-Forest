@@ -218,17 +218,17 @@ public class CameraController : MonoBehaviour
 
     public void UpdateTargetPosition()
     {
-        Vector2 anchorPos = targetButton.GetComponent<RectTransform>().anchoredPosition;
-        anchorPos.y = pitch * 1.2f + initialTargetButtonYAnchor;
-        targetButton.GetComponent<RectTransform>().anchoredPosition = anchorPos;
+        //Vector2 anchorPos = targetButton.GetComponent<RectTransform>().anchoredPosition;
+        //anchorPos.y = pitch * 1.2f + initialTargetButtonYAnchor;
+        //targetButton.GetComponent<RectTransform>().anchoredPosition = anchorPos;
 
         /*  Update the ammo's position to align with the target and the main camera  */
-        ammo.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
+        //ammo.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
         ammo.transform.position = mainCamera.transform.position + gunOffset * mainCamera.transform.forward;
 
         Vector3 eulerAngles = mainCamera.transform.eulerAngles;
-        eulerAngles.x = 0.0f;
-        eulerAngles.y -= 50.0f;
+        eulerAngles.x -= 2.5f;
+        eulerAngles.y += 2.5f;
         ammo.transform.eulerAngles = eulerAngles;
     }
 }
