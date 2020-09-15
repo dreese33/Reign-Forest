@@ -58,17 +58,19 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         //Manually set character type here
+        mainCamera = Camera.main;
+        initialTargetButtonYAnchor = 50f;
         SetupMainCharacter();
 
         UpdateCameraPosition();
-        UpdateCameraAngleMobile();
-        UpdateCameraAngleComputer();
-        mainCamera = Camera.main;
-
         UpdateGunPosition();
 
-        initialTargetButtonYAnchor = 50f;
+        UpdateCameraAngleMobile();
+        UpdateCameraAngleComputer();
+
         UpdateTargetPosition(pitch);
+
+        gun.SetActive(false);
     }
 
 
@@ -88,7 +90,7 @@ public class CameraController : MonoBehaviour
                         {
                             //Perform mobile updates here
                             UpdateCameraPosition();
-                            UpdateGunPosition();
+                            //UpdateGunPosition();
                             
                             UpdateCameraAngleMobile();
                         }
@@ -99,10 +101,10 @@ public class CameraController : MonoBehaviour
                         UpdateCameraAngleComputer();
 
                         UpdateCameraPosition();
-                        UpdateGunPosition();
+                        //UpdateGunPosition();
                 } else
                 {
-                    UpdateGunPosition();
+                    //UpdateGunPosition();
                     lastPos = Vector3.zero;
                     return;
                 }
@@ -169,7 +171,7 @@ public class CameraController : MonoBehaviour
 
         Vector3 eulerAngles = mainCamera.transform.eulerAngles;
         eulerAngles.x = 0.0f;
-        eulerAngles.y -= 70.0f;
+        eulerAngles.y -= 50.0f;
         gun.transform.eulerAngles = eulerAngles;
     }
 
