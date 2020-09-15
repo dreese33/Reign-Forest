@@ -70,6 +70,7 @@ public class CameraController : MonoBehaviour
 
         UpdateTargetPosition(pitch);
 
+        //Disable gun for now
         gun.SetActive(false);
     }
 

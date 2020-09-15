@@ -50,10 +50,11 @@ public class PlayerController : MonoBehaviour
                     anim.Play(genderAnimationString + "|Run");
                     pos.z += speed * Time.deltaTime;
                     character.transform.position = pos;
-                    controller.UpdateCameraPosition();
-                    controller.UpdateGunPosition();
+                    //controller.UpdateGunPosition();
                     break;
             }
+
+            controller.UpdateCameraPosition();
         }
     }
 
