@@ -2102,7 +2102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969261735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -80, y: -66, z: 0}
+  m_LocalPosition: {x: -66, y: -66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1077143647}
@@ -7870,6 +7870,7 @@ MonoBehaviour:
   fireButton: {fileID: 1647040251}
   laserNoise1: {fileID: 8300000, guid: 28b5017c95927b041ba5fddad7e313ac, type: 3}
   gun: {fileID: 525429007}
+  ammo: {fileID: 969261738}
 --- !u!114 &1647040251
 MonoBehaviour:
   m_ObjectHideFlags: 0
