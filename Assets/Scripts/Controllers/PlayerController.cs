@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
             }
 
             controller.UpdateCameraPosition();
+            controller.UpdateTargetPosition();
         }
     }
 

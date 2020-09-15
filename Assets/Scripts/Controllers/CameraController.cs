@@ -51,6 +51,7 @@ public class CameraController : MonoBehaviour
 
 
     public Button targetButton;
+    public GameObject ammo;
     private float initialTargetButtonYAnchor;
 
 
@@ -68,7 +69,7 @@ public class CameraController : MonoBehaviour
         UpdateCameraAngleMobile();
         UpdateCameraAngleComputer();
 
-        UpdateTargetPosition(pitch);
+        UpdateTargetPosition();
 
         //Disable gun for now
         gun.SetActive(false);
@@ -130,7 +131,7 @@ public class CameraController : MonoBehaviour
         pitch = Mathf.Clamp(pitch, minCameraRotationY, maxCameraRotationY);
         yaw = Mathf.Clamp(yaw, minCameraRotationX, maxCameraRotationX);
 
-        UpdateTargetPosition(pitch);
+        UpdateTargetPosition();
 
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
     }
@@ -151,7 +152,7 @@ public class CameraController : MonoBehaviour
         pitch = Mathf.Clamp(pitch, minCameraRotationY, maxCameraRotationY);
         yaw = Mathf.Clamp(yaw, minCameraRotationX, maxCameraRotationX);
 
-        UpdateTargetPosition(pitch);
+        UpdateTargetPosition();
 
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
 
@@ -215,10 +216,19 @@ public class CameraController : MonoBehaviour
     }
 
 
-    void UpdateTargetPosition(float pitch)
+    public void UpdateTargetPosition()
     {
         Vector2 anchorPos = targetButton.GetComponent<RectTransform>().anchoredPosition;
         anchorPos.y = pitch * 1.2f + initialTargetButtonYAnchor;
         targetButton.GetComponent<RectTransform>().anchoredPosition = anchorPos;
+
+        /*  Update the ammo's position to align with the target and the main camera  */
+        ammo.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
+        ammo.transform.position = mainCamera.transform.position + gunOffset * mainCamera.transform.forward;
+
+        Vector3 eulerAngles = mainCamera.transform.eulerAngles;
+        eulerAngles.x = 0.0f;
+        eulerAngles.y -= 50.0f;
+        ammo.transform.eulerAngles = eulerAngles;
     }
 }
