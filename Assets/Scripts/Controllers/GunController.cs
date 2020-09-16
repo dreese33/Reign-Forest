@@ -13,7 +13,6 @@ public class GunController : MonoBehaviour
     public AudioClip laserNoise1;
     public GameObject gun;
     public ParticleSystem ammo;
-    private bool first = true;
 
     // Start is called before the first frame update
     void Start()
@@ -30,14 +29,7 @@ public class GunController : MonoBehaviour
 
 
     void OnFire()
-    {
-        if (first)
-        {
-            ammo.Emit(1);
-            first = false;
-            return;
-        }
-        
+    {   
         audioSource.PlayOneShot(laserNoise1);
         ammo.Emit(1);
     }
@@ -45,7 +37,6 @@ public class GunController : MonoBehaviour
     
     void SetupParticleSystem()
     {
-        ammo.Stop();
-        OnFire();
+        ammo.Pause();
     }
 }
