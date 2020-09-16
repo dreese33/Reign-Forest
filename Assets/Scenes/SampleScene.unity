@@ -7853,7 +7853,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 100, y: 100}
-  m_SizeDelta: {x: 65, y: 65}
+  m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1647040250
 MonoBehaviour:
@@ -7934,7 +7934,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fd11236f80659174d84566b5c8281df6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b01d27d763c577b46adffff903ca29f3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
