@@ -53,6 +53,7 @@ public class CameraController : MonoBehaviour
     public Button targetButton;
     public GameObject ammo;
     private float initialTargetButtonYAnchor;
+    private readonly Vector3 ammoOffset = new Vector3(0.0f, 0.0f, 5.0f);
 
 
     // Start is called before the first frame update
@@ -216,6 +217,7 @@ public class CameraController : MonoBehaviour
     }
 
 
+    /* Needs heavy modification, learn Quaternions and Raycasts! */
     public void UpdateTargetPosition()
     {
         //Vector2 anchorPos = targetButton.GetComponent<RectTransform>().anchoredPosition;
@@ -224,7 +226,11 @@ public class CameraController : MonoBehaviour
 
         /*  Update the ammo's position to align with the target and the main camera  */
         //ammo.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
-        ammo.transform.position = mainCamera.transform.position + gunOffset * mainCamera.transform.forward;
+        Vector3 pos = mainCamera.transform.position + gunOffset * 5.0f * mainCamera.transform.forward;
+        pos.x += 1f;
+        pos.y += 1f;
+        ammo.transform.position = pos;// + ammoOffset;
+        //ammo.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
 
         Vector3 eulerAngles = mainCamera.transform.eulerAngles;
         eulerAngles.x -= 2.5f;
