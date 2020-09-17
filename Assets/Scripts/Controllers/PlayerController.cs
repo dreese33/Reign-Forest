@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public GameObject character;
     public float speed = 100.0f;
     public bool forwardPressed = false;
+    private bool computerMode = false;
 
 
     // Start is called before the first frame update
@@ -56,23 +57,63 @@ public class PlayerController : MonoBehaviour
 
             controller.UpdateCameraPosition();
             controller.UpdateTargetPosition();
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                BeginForwardArrow();
+            } else if (Input.GetKeyUp(KeyCode.W))
+            {
+                EndForwardArrow();
+            }
         }
+    }
+
+
+    void BeginForwardArrow()
+    {
+        computerMode = true;
+        if (!forwardPressed)
+        {
+            forwardButton.interactable = false;
+            anim.Stop();
+            state = CurrentAnimationState.RUN;
+            forwardPressed = true;
+        }
+    }
+
+
+    void EndForwardArrow()
+    {
+        if (forwardPressed)
+        {
+            forwardButton.interactable = true;
+            anim.Stop();
+            state = CurrentAnimationState.IDLE;
+            forwardPressed = false;
+        }
+        computerMode = false;
     }
 
     
     public void BeginForward()
     {
-        forwardPressed = true;
-        anim.Stop();
-        state = CurrentAnimationState.RUN;
+        if (!computerMode)
+        {
+            forwardPressed = true;
+            anim.Stop();
+            state = CurrentAnimationState.RUN;
+        }
     }
 
 
     public void EndForward()
     {
-        forwardPressed = false;
-        anim.Stop();
-        state = CurrentAnimationState.IDLE;
+        if (!computerMode)
+        {
+            forwardPressed = false;
+            anim.Stop();
+            state = CurrentAnimationState.IDLE;
+        }
     }
 
 
