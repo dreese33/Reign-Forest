@@ -9,10 +9,12 @@ public class ParticleController : MonoBehaviour
     public ParticleSystem splatterParticles;
 
     List<ParticleCollisionEvent> collisionEvents;
+    private bool played = false;
 
     void Start()
     {
         collisionEvents = new List<ParticleCollisionEvent>();
+        //splatterParticles.Pause();
     }
 
 
@@ -30,6 +32,7 @@ public class ParticleController : MonoBehaviour
     {
         splatterParticles.transform.position = collisionEvent.intersection;
         splatterParticles.transform.rotation = Quaternion.LookRotation(collisionEvent.normal);
-        splatterParticles.Emit(10);
+        splatterParticles.Clear();
+        splatterParticles.Play();
     }
 }
