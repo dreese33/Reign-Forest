@@ -5,15 +5,31 @@ using UnityEngine;
 public class ParticleController : MonoBehaviour
 {
 
-    
+    public ParticleSystem particleLauncher;
+    public ParticleSystem splatterParticles;
+
+    List<ParticleCollisionEvent> collisionEvents;
 
     void Start()
     {
-       
+        collisionEvents = new List<ParticleCollisionEvent>();
     }
+
 
     void OnParticleCollision(GameObject other)
     {
+        ParticlePhysicsExtensions.GetCollisionEvents(particleLauncher, other, collisionEvents);
+        for (int i = 0; i < collisionEvents.Count; i++)
+        {
+            SplatterParticles(collisionEvents[i]);
+        }
+    }
 
+
+    void SplatterParticles(ParticleCollisionEvent collisionEvent)
+    {
+        splatterParticles.transform.position = collisionEvent.intersection;
+        splatterParticles.transform.rotation = Quaternion.LookRotation(collisionEvent.normal);
+        splatterParticles.Emit(10);
     }
 }
