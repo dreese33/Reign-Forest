@@ -28,8 +28,17 @@ public class GunController : MonoBehaviour
     }
 
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            OnFire();
+        }
+    }
+
+
     void OnFire()
-    {   
+    {
         audioSource.PlayOneShot(laserNoise1);
         ammo.Emit(1);
     }
