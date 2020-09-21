@@ -35,22 +35,19 @@ public class ZombieController : MonoBehaviour
 
     void Update()
     {
-        if (controller.PlayerAlive)
+        anim.Play("Zombie|Walk");
+
+        if (PastPlayer())
         {
-            anim.Play("Zombie|Walk");
+            CameraController.PlayerAlive = false;
+        } else
+        {
+            transform.position += speed * transform.forward * Time.deltaTime;
+        }
 
-            if (InInnerRadius())
-            {
-                Debug.Log("Game over");
-            } else 
-            {
-                transform.position += speed * transform.forward * Time.deltaTime;
-            }
-
-            if (InRadius())
-            {
-                RotateZombiePlayer();
-            }
+        if (InRadius())
+        {
+            RotateZombiePlayer();
         }
     }
 
@@ -78,9 +75,9 @@ public class ZombieController : MonoBehaviour
     }
 
 
-    bool InInnerRadius()
+    bool PastPlayer()
     {
-        return Vector3.Distance(transform.position, player.transform.position) < 15.0f;
+        return (transform.position.z - player.transform.position.z) < 15.0f;
     }
 
 

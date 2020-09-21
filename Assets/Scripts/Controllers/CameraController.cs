@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
 
     public readonly Vector3 offset = new Vector3(0.0f, 0.0f, 3.0f);
 
-    public bool PlayerAlive = true;
+    public static bool PlayerAlive = true;
     public GameObject maleCharacter;
     public GameObject femaleCharacter;
     public Transform femaleTarget;

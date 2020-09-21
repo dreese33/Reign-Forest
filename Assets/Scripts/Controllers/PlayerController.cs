@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        if (controller.PlayerAlive) 
+        if (CameraController.PlayerAlive) 
         {
             Vector3 pos = character.transform.position;
 
