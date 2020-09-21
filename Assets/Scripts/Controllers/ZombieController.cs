@@ -9,11 +9,22 @@ public class ZombieController : MonoBehaviour
     private float speed = 0.0f;
     public GameObject male;
     public GameObject female;
+    private GameObject player;
     private float rand;
 
 
     void Start()
     {
+        switch (CameraController.gender)
+        {
+            case CharacterType.MALE:
+                player = male;
+                break;
+            case CharacterType.FEMALE:
+                player = female;
+                break;
+        }
+
         anim = gameObject.GetComponent<Animation>();
         controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
         transform.position = GetRandomPosition();
@@ -34,22 +45,10 @@ public class ZombieController : MonoBehaviour
 
             transform.position = pos;
 
-            switch (CameraController.gender)
+            if (InRadius())
             {
-                case CharacterType.MALE:
-                    if (InMaleRadius())
-                    {
-                        //Turn toward male
-                        Debug.Log("male turn");
-                    }
-                    break;
-                case CharacterType.FEMALE:
-                    if (InFemaleRadius())
-                    {
-                        //Turn toward female
-                        Debug.Log("female turn");
-                    }
-                    break;
+                Debug.Log("Turn");
+                RotateZombiePlayer();
             }
         }
     }
@@ -61,16 +60,7 @@ public class ZombieController : MonoBehaviour
         pos.x = Random.Range(12.5f, 82.5f);
 
         rand = Random.Range(300.0f, 850.0f);
-        switch (CameraController.gender)
-        {
-            case CharacterType.MALE:
-                pos.z = male.transform.position.z + rand;
-                break;
-            case CharacterType.FEMALE:
-                pos.z = female.transform.position.z + rand;
-                break;
-        }
-
+        pos.z = player.transform.position.z + rand;
         return pos;
     }
 
@@ -81,14 +71,14 @@ public class ZombieController : MonoBehaviour
     }
     
 
-    bool InMaleRadius()
+    bool InRadius()
     {
-        return Vector3.Distance(transform.position, male.transform.position) < 100.0f;
+        return Vector3.Distance(transform.position, player.transform.position) < 100.0f;
     }
 
 
-    bool InFemaleRadius()
+    void RotateZombiePlayer()
     {
-        return Vector3.Distance(transform.position, female.transform.position) < 100.0f;
+
     }
 }
