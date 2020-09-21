@@ -7,6 +7,7 @@ public class ZombieController : MonoBehaviour
     private Animation anim;
     private CameraController controller;
     private float speed = 0.0f;
+    private readonly float rotateSpeed = 20.0f;
     public GameObject male;
     public GameObject female;
     private GameObject player;
@@ -47,7 +48,6 @@ public class ZombieController : MonoBehaviour
 
             if (InRadius())
             {
-                Debug.Log("Turn");
                 RotateZombiePlayer();
             }
         }
@@ -79,6 +79,24 @@ public class ZombieController : MonoBehaviour
 
     void RotateZombiePlayer()
     {
+        //Needs optimization (many zombies will spawn)
+        Vector3 rotation = transform.eulerAngles;
+        float deltaZ = transform.position.z - player.transform.position.z;
+        float deltaX = transform.position.x - player.transform.position.x;
+        float optimalAngle = Mathf.Atan(deltaX / deltaZ) * Mathf.Rad2Deg + 180.0f;
+        Debug.Log("Optimal angle " +  optimalAngle);
 
+        if (Mathf.Abs(transform.eulerAngles.y - optimalAngle) > 2.0f) 
+        {
+            if (transform.eulerAngles.y < optimalAngle)
+            {
+                rotation.y += rotateSpeed * Time.deltaTime;
+            } else
+            {
+                rotation.y -= rotateSpeed * Time.deltaTime;
+            }
+        }
+
+        transform.eulerAngles = rotation;
     }
 }
