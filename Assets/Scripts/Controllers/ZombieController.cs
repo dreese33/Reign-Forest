@@ -38,7 +38,14 @@ public class ZombieController : MonoBehaviour
         if (controller.PlayerAlive)
         {
             anim.Play("Zombie|Walk");
-            transform.position += speed * transform.forward * Time.deltaTime;
+
+            if (InInnerRadius())
+            {
+                Debug.Log("Game over");
+            } else 
+            {
+                transform.position += speed * transform.forward * Time.deltaTime;
+            }
 
             if (InRadius())
             {
@@ -71,6 +78,12 @@ public class ZombieController : MonoBehaviour
     }
 
 
+    bool InInnerRadius()
+    {
+        return Vector3.Distance(transform.position, player.transform.position) < 15.0f;
+    }
+
+
     void RotateZombiePlayer()
     {
         //Needs optimization (many zombies will spawn)
@@ -78,7 +91,6 @@ public class ZombieController : MonoBehaviour
         float deltaZ = transform.position.z - player.transform.position.z;
         float deltaX = transform.position.x - player.transform.position.x;
         float optimalAngle = Mathf.Atan(deltaX / deltaZ) * Mathf.Rad2Deg + 180.0f;
-        Debug.Log("Optimal angle " +  optimalAngle);
 
         if (Mathf.Abs(transform.eulerAngles.y - optimalAngle) > 1.0f) 
         {
