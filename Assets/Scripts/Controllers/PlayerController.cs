@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 
     public Button forwardButton;
     public GameObject character;
-    public float speed = 100.0f;
+    private float speed = 100.0f;
     public bool forwardPressed = false;
     private bool computerMode = false;
 
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        if (controller.PlayerAlive == true) 
+        if (controller.PlayerAlive) 
         {
             Vector3 pos = character.transform.position;
 

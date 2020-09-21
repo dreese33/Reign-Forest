@@ -31,12 +31,19 @@ public class TerrainController : MonoBehaviour
     {
         if (player.forwardPressed)
         {
-            float playerPosition = player.character.transform.position.z - terrainCount * terrainLength;
-            if (playerPosition > 50)
+            float playerPosition = GetPlayerPosition();
+            
+            if (playerPosition > 0)
             {
                 AddNewTerrain();
             }
         }
+    }
+
+
+    float GetPlayerPosition()
+    {
+        return player.character.transform.position.z - terrainCount * terrainLength;
     }
 
 
