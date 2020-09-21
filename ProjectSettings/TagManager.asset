@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Scroll View
+  - Zombie
   layers:
   - Default
   - TransparentFX

@@ -5,7 +5,7 @@ using UnityEngine;
 public class GenerateEnemies : MonoBehaviour
 {
 
-    public float levelOfDifficulty = 1.0f;
+    public static float levelOfDifficulty = 1.0f;
 
     //Replace with pooling later
     public GameObject zombie;

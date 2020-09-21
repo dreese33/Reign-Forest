@@ -2617,6 +2617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZombieLowQuality
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2bf533c01ecfdac4eb8a224bbbfb7371, type: 3}
+      propertyPath: m_TagString
+      value: Zombie
+      objectReference: {fileID: 0}
     - target: {fileID: 2223639932434330405, guid: 2bf533c01ecfdac4eb8a224bbbfb7371, type: 3}
       propertyPath: m_CullingType
       value: 1
@@ -2719,6 +2723,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MaleLowQuality
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 703e4caf40db8024788f835aaca8d5b6, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 703e4caf40db8024788f835aaca8d5b6, type: 3}
 --- !u!1 &1350940506
@@ -2750,7 +2758,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf1aaf3fda2f7c49a9326bb8b72fb74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelOfDifficulty: 1
   zombie: {fileID: 817741859}
 --- !u!4 &1350940508
 Transform:
@@ -8337,6 +8344,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 840b50ceb76cfc04daf9759b40a113ae, type: 3}
       propertyPath: m_Name
       value: FemaleLowFrames
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 840b50ceb76cfc04daf9759b40a113ae, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 840b50ceb76cfc04daf9759b40a113ae, type: 3}
