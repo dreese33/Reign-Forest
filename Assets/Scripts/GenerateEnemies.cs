@@ -16,7 +16,7 @@ public class GenerateEnemies : MonoBehaviour
         Debug.Log("Working");
 
 
-        StartCoroutine(SpawnZombies(50));
+        StartCoroutine(SpawnZombies(20));
     }
 
 
@@ -36,7 +36,6 @@ public class GenerateEnemies : MonoBehaviour
 
     private float RandomNumberSeconds()
     {
-        //return Random.Range(0.5f, 1.5f);
-        return 0.0f;
+        return Random.Range(0.0f, 1.5f);
     }
 }
