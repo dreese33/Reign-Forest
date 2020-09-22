@@ -12,6 +12,8 @@ public class ZombieController : MonoBehaviour
     public GameObject female;
     private GameObject player;
     private float rand;
+    private float health;
+    private bool rootZombie = false;
 
 
     void Start()
@@ -30,24 +32,34 @@ public class ZombieController : MonoBehaviour
         controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
         transform.position = GetRandomPosition();
         speed = GetRandomSpeed();
+
+        if (name == "ZombieLowQuality")
+        {
+            //Out of sight out of mind
+            transform.position = new Vector3(-100.0f, transform.position.y, -100.0f);
+            rootZombie = true;
+        }
     }
 
 
     void Update()
     {
-        anim.Play("Zombie|Walk");
+        if (!rootZombie)
+        {
+            anim.Play("Zombie|Walk");
 
-        if (PastPlayer())
-        {
-            CameraController.PlayerAlive = false;
-        } else
-        {
-            transform.position += speed * transform.forward * Time.deltaTime;
-        }
+            if (PastPlayer())
+            {
+                CameraController.PlayerAlive = false;
+            } else
+            {
+                transform.position += speed * transform.forward * Time.deltaTime;
+            }
 
-        if (InRadius())
-        {
-            RotateZombiePlayer();
+            if (InRadius())
+            {
+                RotateZombiePlayer();
+            }
         }
     }
 
@@ -101,5 +113,11 @@ public class ZombieController : MonoBehaviour
         }
 
         transform.eulerAngles = rotation;
+    }
+
+
+    public void subtractFromHealth(string name)
+    {
+        Debug.Log("Name: " + name);
     }
 }

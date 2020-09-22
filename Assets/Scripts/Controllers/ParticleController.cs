@@ -14,16 +14,21 @@ public class ParticleController : MonoBehaviour
     void Start()
     {
         collisionEvents = new List<ParticleCollisionEvent>();
-        //splatterParticles.Pause();
     }
 
 
     void OnParticleCollision(GameObject other)
     {
+        GameObject otherObject = other.transform.root.gameObject;
         ParticlePhysicsExtensions.GetCollisionEvents(particleLauncher, other, collisionEvents);
         for (int i = 0; i < collisionEvents.Count; i++)
         {
             SplatterParticles(collisionEvents[i]);
+
+            if (otherObject.name.Contains("ZombieLowQuality"))
+            {
+                Destroy(otherObject);
+            }
         }
     }
 

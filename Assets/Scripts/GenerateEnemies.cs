@@ -10,13 +10,13 @@ public class GenerateEnemies : MonoBehaviour
 
     //Replace with pooling later
     public GameObject zombie;
+    public List<GameObject> zombies = new List<GameObject>();
+    private int currentSpawnValue = 20;
 
     void Start()
     {
         Debug.Log("Working");
-
-
-        StartCoroutine(SpawnZombies(20));
+        StartCoroutine(SpawnZombies(currentSpawnValue));
     }
 
 
@@ -26,7 +26,8 @@ public class GenerateEnemies : MonoBehaviour
 
         for (int i = 0; i < iters; i++)
         {
-            Instantiate(zombie);
+            GameObject newZombie = Instantiate(zombie);
+            newZombie.name = "ZombieLowQuality" + i;
             yield return new WaitForSeconds(RandomNumberSeconds());
         }
 
