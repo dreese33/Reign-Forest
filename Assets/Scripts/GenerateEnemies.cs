@@ -10,33 +10,67 @@ public class GenerateEnemies : MonoBehaviour
 
     //Replace with pooling later
     public GameObject zombie;
-    public List<GameObject> zombies = new List<GameObject>();
     private int currentSpawnValue = 20;
+    private int numberOfZombies = 0;
 
     void Start()
     {
-        Debug.Log("Working");
-        StartCoroutine(SpawnZombies(currentSpawnValue));
+        StartZombieSpawner();
     }
 
 
-    private IEnumerator SpawnZombies(int iters)
+    void Update() 
+    {
+        if (CameraController.PlayerAlive)
+        {
+            if (numberOfZombies == 0 && !beingHandled)
+            {
+                //StartZombieSpawner();
+            }
+        }
+    }
+
+
+    private IEnumerator SpawnZombiesDelay(int iters, float delay)
     {
         beingHandled = true;
 
         for (int i = 0; i < iters; i++)
         {
-            GameObject newZombie = Instantiate(zombie);
-            newZombie.name = "ZombieLowQuality" + i;
-            yield return new WaitForSeconds(RandomNumberSeconds());
+            AddZombieToGame(i);
+            yield return new WaitForSeconds(delay);
         }
 
         beingHandled = false;
     }
 
 
+    private void SpawnZombies(int iters)
+    {
+        for (int i = 0; i < iters; i++)
+        {
+            AddZombieToGame(i);
+        }
+    }
+
+
+    private void AddZombieToGame(int identifier)
+    {
+        GameObject newZombie = Instantiate(zombie);
+        newZombie.name = "ZombieLowQuality" + identifier;
+        numberOfZombies++;
+    }
+
+
     private float RandomNumberSeconds()
     {
         return Random.Range(0.0f, 1.5f);
+    }
+
+
+    private void StartZombieSpawner()
+    {
+        SpawnZombies(1);
+        StartCoroutine(SpawnZombiesDelay(currentSpawnValue, RandomNumberSeconds()));
     }
 }
