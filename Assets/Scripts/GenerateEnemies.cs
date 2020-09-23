@@ -11,7 +11,7 @@ public class GenerateEnemies : MonoBehaviour
     //Replace with pooling later
     public GameObject zombie;
     private int currentSpawnValue = 20;
-    private int numberOfZombies = 0;
+    public int numberOfZombies = 0;
 
     void Start()
     {
@@ -23,9 +23,9 @@ public class GenerateEnemies : MonoBehaviour
     {
         if (CameraController.PlayerAlive)
         {
-            if (numberOfZombies == 0 && !beingHandled)
+            if (numberOfZombies == 1 && !beingHandled)
             {
-                //StartZombieSpawner();
+                StartZombieSpawner();
             }
         }
     }

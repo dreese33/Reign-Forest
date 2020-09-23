@@ -2844,6 +2844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombie: {fileID: 817741859}
+  numberOfZombies: 0
 --- !u!4 &1350940508
 Transform:
   m_ObjectHideFlags: 0
@@ -7767,6 +7768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleLauncher: {fileID: 1384608445}
   splatterParticles: {fileID: 1692108139}
+  generatorObject: {fileID: 1350940506}
 --- !u!1 &1398098469
 GameObject:
   m_ObjectHideFlags: 0

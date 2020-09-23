@@ -10,10 +10,13 @@ public class ParticleController : MonoBehaviour
 
     List<ParticleCollisionEvent> collisionEvents;
     private bool played = false;
+    public GameObject generatorObject;
+    private GenerateEnemies enemyGenerator;
 
     void Start()
     {
         collisionEvents = new List<ParticleCollisionEvent>();
+        enemyGenerator = generatorObject.GetComponent<GenerateEnemies>();
     }
 
 
@@ -28,6 +31,7 @@ public class ParticleController : MonoBehaviour
             if (otherObject.name.Contains("ZombieLowQuality"))
             {
                 Destroy(otherObject);
+                enemyGenerator.numberOfZombies--;
             }
         }
     }
