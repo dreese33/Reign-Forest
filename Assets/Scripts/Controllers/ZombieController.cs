@@ -12,7 +12,7 @@ public class ZombieController : MonoBehaviour
     public GameObject female;
     private GameObject player;
     private float rand;
-    private float health;
+    private int health;
     private bool rootZombie = false;
 
 
@@ -32,6 +32,7 @@ public class ZombieController : MonoBehaviour
         controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
         transform.position = GetRandomPosition();
         speed = GetRandomSpeed();
+        health = GetRandomHealth();
 
         if (name == "ZombieLowQuality")
         {
@@ -116,8 +117,20 @@ public class ZombieController : MonoBehaviour
     }
 
 
-    public void subtractFromHealth(string name)
+    public void SubtractFromHealth(int damage)
     {
-        Debug.Log("Name: " + name);
+        health -= damage;
+    }
+
+
+    public int GetHealth()
+    {
+        return health;
+    }
+
+
+    private int GetRandomHealth()
+    {
+        return Random.Range(50, 150);
     }
 }

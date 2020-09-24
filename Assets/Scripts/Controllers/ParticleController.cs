@@ -30,8 +30,14 @@ public class ParticleController : MonoBehaviour
 
             if (otherObject.name.Contains("ZombieLowQuality"))
             {
-                Destroy(otherObject);
-                enemyGenerator.numberOfZombies--;
+                ZombieController zombie = otherObject.GetComponent<ZombieController>();
+                zombie.SubtractFromHealth(50);
+
+                if (zombie.GetHealth() <= 0)
+                {
+                    Destroy(otherObject);
+                    enemyGenerator.numberOfZombies--;
+                }
             }
         }
     }
