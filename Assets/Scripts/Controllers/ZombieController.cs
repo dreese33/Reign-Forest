@@ -123,7 +123,7 @@ public class ZombieController : MonoBehaviour
     }
 
 
-    public int GetHealth()
+    public int GetHealth()  
     {
         return health;
     }
