@@ -14,6 +14,8 @@ public class GenerateTrees : MonoBehaviour
     private int frontIndex = 0;
     private int backIndex = 0;
     private GameObject character;
+    private float[] rightRange = new float[] {75.0f, 85.0f};
+    private float[] leftRange = new float[] {15.0f, 25.0f};
 
     void Start()
     {
@@ -27,6 +29,9 @@ public class GenerateTrees : MonoBehaviour
         {
             newPosLeft.z += 100.0f;
             newPosRight.z += 100.0f;
+
+            newPosLeft.x = Random.Range(leftRange[0], leftRange[1]);
+            newPosRight.x = Random.Range(rightRange[0], rightRange[1]);
 
             treesLeft[i] = Instantiate(treeLeft, newPosLeft, Quaternion.identity);
             treesRight[i] = Instantiate(treeRight, newPosRight, Quaternion.identity);
@@ -42,8 +47,8 @@ public class GenerateTrees : MonoBehaviour
         {
             if (character.transform.position.z > treesLeft[backIndex].transform.position.z + 50.0f)
             {
-                treesLeft[backIndex].transform.position = GetNewTreePosition(treesLeft[backIndex]);
-                treesRight[backIndex].transform.position = GetNewTreePosition(treesRight[backIndex]);
+                treesLeft[backIndex].transform.position = GetNextPosition(treesLeft[backIndex], leftRange);
+                treesRight[backIndex].transform.position = GetNextPosition(treesRight[backIndex], rightRange);
 
                 frontIndex = backIndex;
                 if (backIndex == 9)
@@ -56,10 +61,13 @@ public class GenerateTrees : MonoBehaviour
     }
 
 
-    private Vector3 GetNewTreePosition(GameObject tree)
+
+    //range can only be of length 2, containing two floats
+    private Vector3 GetNextPosition(GameObject tree, float[] range)
     {
         Vector3 newPos = tree.transform.position;
         newPos.z += 1000.0f;
+        newPos.x = Random.Range(range[0], range[1]);
         return newPos;
     }
 
