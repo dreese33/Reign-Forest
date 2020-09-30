@@ -7,14 +7,19 @@ using UnityEngine.UI;
 public class GunController : MonoBehaviour
 {
 
-    public Button fireButton;
-    private AudioSource audioSource;
-    //private Animation anim;
-    public AudioClip laserNoise1;
-    public GameObject gun;
-    public ParticleSystem ammo;
+    [SerializeField]
+    Button fireButton;
 
-    // Start is called before the first frame update
+    [SerializeField]
+    AudioSource audioSource;
+
+    [SerializeField]
+    AudioClip laserNoise1;
+
+    [SerializeField]
+    ParticleSystem ammo;
+
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
