@@ -34,7 +34,7 @@ public class ZombieController : MonoBehaviour
         anim = gameObject.GetComponent<Animation>();
         controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
         transform.position = GetRandomPosition();
-        speed = GetRandomSpeed();
+        //speed = GetRandomSpeed();
         health = GetRandomHealth();
 
         if (name == "ZombieLowQuality")
@@ -76,12 +76,6 @@ public class ZombieController : MonoBehaviour
         rand = Random.Range(300.0f, 850.0f);
         pos.z = player.transform.position.z + rand;
         return pos;
-    }
-
-
-    float GetRandomSpeed()
-    {
-        return Random.Range(5.0f, 20.0f * GenerateEnemies.levelOfDifficulty);
     }
     
 
@@ -136,5 +130,11 @@ public class ZombieController : MonoBehaviour
     private int GetRandomHealth()
     {
         return Random.Range(50, 150);
+    }
+
+
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
     }
 }
