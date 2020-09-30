@@ -11,6 +11,7 @@ public class CharacterSelectController : MonoBehaviour
     public Button femaleButton;
     public Slider progressBar;
     public GameObject progressCanvas;
+    private bool loading = false;
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +24,12 @@ public class CharacterSelectController : MonoBehaviour
 
     void SelectMale()
     {
-        CameraController.gender = CharacterType.MALE;
-        StartCoroutine(LoadCharacter());
+        if (!loading)
+        {
+            CameraController.gender = CharacterType.MALE;
+            StartCoroutine(LoadCharacter());
+            loading = true;
+        }
     }
 
 
@@ -49,7 +54,11 @@ public class CharacterSelectController : MonoBehaviour
 
     void SelectFemale()
     {
-        CameraController.gender = CharacterType.FEMALE;
-        StartCoroutine(LoadCharacter());
+        if (!loading)
+        {
+            CameraController.gender = CharacterType.FEMALE;
+            StartCoroutine(LoadCharacter());
+            loading = true;
+        }
     }
 }
