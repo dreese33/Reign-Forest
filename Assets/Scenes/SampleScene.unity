@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 23eebae8a7a7dda42bd9f1c1ef580351, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2430,10 +2430,10 @@ MonoBehaviour:
   femaleTarget: {fileID: 1649291922}
   maleTarget: {fileID: 239410290}
   gameTarget: {fileID: 0}
-  cameraPerspectiveEnabled: 1
   mainCamera: {fileID: 0}
   gun: {fileID: 525429007}
   ammo: {fileID: 1384608442}
+  cameraPerspectiveEnabled: 1
 --- !u!1 &969445412
 GameObject:
   m_ObjectHideFlags: 0
@@ -8426,8 +8426,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1c7116d290d334380436152eb7c697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunsObjectView: {fileID: 186685809}
   gunsObjectViewShowing: 0
+  gunsObjectView: {fileID: 186685809}
   gunsButton: {fileID: 70020197}
   gunsButtonSprite: {fileID: 21300000, guid: c65bc80d90218324eb25b2e87239ab04, type: 3}
   gunsButtonSpriteFlip: {fileID: 21300000, guid: 1b20de1a840f16f419cc82e956980f4f, type: 3}
@@ -8483,8 +8483,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireButton: {fileID: 1647040251}
+  audioSource: {fileID: 0}
   laserNoise1: {fileID: 8300000, guid: 28b5017c95927b041ba5fddad7e313ac, type: 3}
-  gun: {fileID: 525429007}
   ammo: {fileID: 1384608445}
 --- !u!114 &1647040251
 MonoBehaviour:
