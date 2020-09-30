@@ -31,14 +31,14 @@ public class GenerateEnemies : MonoBehaviour
     }
 
 
-    private IEnumerator SpawnZombiesDelay(int iters, float delay)
+    private IEnumerator SpawnZombiesDelay(int iters)
     {
         beingHandled = true;
 
         for (int i = 0; i < iters; i++)
         {
             AddZombieToGame(i);
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(RandomNumberSeconds());
         }
 
         beingHandled = false;
@@ -71,6 +71,6 @@ public class GenerateEnemies : MonoBehaviour
     private void StartZombieSpawner()
     {
         SpawnZombies(1);
-        StartCoroutine(SpawnZombiesDelay(currentSpawnValue, RandomNumberSeconds()));
+        StartCoroutine(SpawnZombiesDelay(currentSpawnValue));
     }
 }

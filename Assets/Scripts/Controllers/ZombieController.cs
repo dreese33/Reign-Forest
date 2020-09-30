@@ -15,6 +15,9 @@ public class ZombieController : MonoBehaviour
     private int health;
     private bool rootZombie = false;
 
+    //Health bar
+    public GameObject healthBar;
+
 
     void Start()
     {
@@ -96,7 +99,7 @@ public class ZombieController : MonoBehaviour
 
     void RotateZombiePlayer()
     {
-        //Needs optimization (many zombies will spawn)
+        //Possibly needs optimization (many zombies will spawn)
         Vector3 rotation = transform.eulerAngles;
         float deltaZ = transform.position.z - player.transform.position.z;
         float deltaX = transform.position.x - player.transform.position.x;
@@ -120,6 +123,7 @@ public class ZombieController : MonoBehaviour
     public void SubtractFromHealth(int damage)
     {
         health -= damage;
+        //Update health bar
     }
 
 
