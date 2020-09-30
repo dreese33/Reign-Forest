@@ -21,7 +21,7 @@ public class ZombieController : MonoBehaviour
 
     void Start()
     {
-        switch (CameraController.gender)
+        switch (PlayerController.gender)
         {
             case CharacterType.MALE:
                 player = male;

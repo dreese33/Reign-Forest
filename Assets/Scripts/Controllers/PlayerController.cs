@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     public bool forwardPressed = false;
     private bool computerMode = false;
 
+    //Statics
+    public static CharacterType gender = CharacterType.FEMALE;
+
 
     // Start is called before the first frame update
     void Start()
@@ -119,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
     private void CharacterSelect()
     {
-        switch (CameraController.gender)
+        switch (PlayerController.gender)
         {
             case CharacterType.MALE:
                 character = GameObject.Find("MaleLowQuality");

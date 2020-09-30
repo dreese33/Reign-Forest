@@ -13,47 +13,56 @@ public enum CharacterType {
 public class CameraController : MonoBehaviour
 {
 
-    private Vector3 mousePos;
-    private Vector3 lastPos = Vector3.zero;
+    Vector3 mousePos;
+    Vector3 lastPos = Vector3.zero;
 
-    private Touch touch;
-    private int totalTouchCount;
+    Touch touch;
+    int totalTouchCount;
 
-    public float rotateSpeedMobile = 3.0f;
-    public float rotateSpeedComputer = 20.0f;
-    public float invertPitch = 1.0f;
-    public float deltaOffset = 0.01f;
+    float rotateSpeedMobile = 3.0f;
+    float rotateSpeedComputer = 20.0f;
+    float invertPitch = 1.0f;
+    float deltaOffset = 0.01f;
+    float pitch, yaw = 0.0f;
 
-    private float pitch, yaw = 0.0f;
+    int minCameraRotationX = -60;
+    int maxCameraRotationX = 60;
+    int minCameraRotationY = -10;
+    int maxCameraRotationY = 30;
 
-    public readonly Vector3 offset = new Vector3(0.0f, 0.0f, 3.0f);
 
-    public static bool PlayerAlive = true;
-    public GameObject maleCharacter;
-    public GameObject femaleCharacter;
-    public Transform femaleTarget;
-    public Transform maleTarget;
-    public Transform gameTarget;
+    [SerializeField]
+    GameObject maleCharacter;
 
-    //STATIC variable beware
-    public static CharacterType gender = CharacterType.FEMALE;
+    [SerializeField]
+    GameObject femaleCharacter;
+
+    [SerializeField]
+    Transform femaleTarget;
+
+    [SerializeField]
+    Transform maleTarget;
+
+    [SerializeField]
+    Transform gameTarget;
+
+    [SerializeField]
+    Camera mainCamera;
+
+    [SerializeField]
+    GameObject gun;
+
+    [SerializeField]
+    GameObject ammo;
 
     public bool cameraPerspectiveEnabled = true;
 
-    public Camera mainCamera;
-    public GameObject gun;
-    private readonly float gunOffset = 5.0f;
+    //Constants
+    readonly Vector3 OFFSET = new Vector3(0.0f, 0.0f, 3.0f);
+    readonly float GUN_OFFSET = 5.0f;
 
-    private int minCameraRotationX = -60;
-    private int maxCameraRotationX = 60;
-    private int minCameraRotationY = -10;
-    private int maxCameraRotationY = 30;
-
-
-    public Button targetButton;
-    public GameObject ammo;
-    private float initialTargetButtonYAnchor;
-    private readonly Vector3 ammoOffset = new Vector3(0.0f, 0.0f, 5.0f);
+    //Statics
+    public static bool PlayerAlive = true;
 
 
     // Start is called before the first frame update
@@ -61,7 +70,6 @@ public class CameraController : MonoBehaviour
     {
         //Manually set character type here
         mainCamera = Camera.main;
-        initialTargetButtonYAnchor = 50f;
         SetupMainCharacter();
 
         UpdateCameraPosition();
@@ -86,34 +94,40 @@ public class CameraController : MonoBehaviour
             {
                 if (Input.touchCount > 0)
                 {
-                    totalTouchCount = Mathf.Clamp(Input.touchCount, 1, 2);
-                    for (int i = 0; i < totalTouchCount; i++) {
-                        touch = Input.GetTouch(i);
-                        if (touch.phase == TouchPhase.Moved && !IsPointerOverUIObject()) 
-                        {
-                            //Perform mobile updates here
-                            UpdateCameraPosition();
-                            //UpdateGunPosition();
-                            
-                            UpdateCameraAngleMobile();
-                        }
-                    }
+                    UpdateOnMobile();
                 } else if (Input.GetKey(KeyCode.Mouse0))
                 {
-                        //Perform computer updates here
-                        UpdateCameraAngleComputer();
-
-                        UpdateCameraPosition();
-                        //UpdateGunPosition();
+                    UpdateOnComputer();
                 } else
                 {
-                    //UpdateGunPosition();
                     lastPos = Vector3.zero;
                     return;
                 }
             }
         }
     }
+
+
+    private void UpdateOnMobile()
+    {
+        totalTouchCount = Mathf.Clamp(Input.touchCount, 1, 2);
+        for (int i = 0; i < totalTouchCount; i++) {
+            touch = Input.GetTouch(i);
+            if (touch.phase == TouchPhase.Moved && !IsPointerOverUIObject()) 
+            {
+                UpdateCameraPosition();
+                UpdateCameraAngleMobile();
+            }
+        }
+    }
+
+
+    private void UpdateOnComputer()
+    {
+        UpdateCameraAngleComputer();
+        UpdateCameraPosition();
+    }
+    
 
 
     private bool IsPointerOverUIObject() {
@@ -163,14 +177,14 @@ public class CameraController : MonoBehaviour
 
     public void UpdateCameraPosition()
     {
-        transform.position = gameTarget.position + offset;
+        transform.position = gameTarget.position + OFFSET;
     }
 
 
     public void UpdateGunPosition()
     {
         gun.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y - 90.0f, 0.0f, mainCamera.transform.rotation.w);
-        gun.transform.position = mainCamera.transform.position + gunOffset * mainCamera.transform.forward;
+        gun.transform.position = mainCamera.transform.position + GUN_OFFSET * mainCamera.transform.forward;
 
         Vector3 eulerAngles = mainCamera.transform.eulerAngles;
         eulerAngles.x = 0.0f;
@@ -181,7 +195,7 @@ public class CameraController : MonoBehaviour
 
     void SetupMainCharacter()
     {
-        switch (gender)
+        switch (PlayerController.gender)
         {
             case CharacterType.FEMALE:
                 CenterGameTargetFemale();
@@ -217,20 +231,12 @@ public class CameraController : MonoBehaviour
     }
 
 
-    /* Needs heavy modification, learn Quaternions and Raycasts! */
     public void UpdateTargetPosition()
     {
-        //Vector2 anchorPos = targetButton.GetComponent<RectTransform>().anchoredPosition;
-        //anchorPos.y = pitch * 1.2f + initialTargetButtonYAnchor;
-        //targetButton.GetComponent<RectTransform>().anchoredPosition = anchorPos;
-
-        /*  Update the ammo's position to align with the target and the main camera  */
-        //ammo.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
-        Vector3 pos = mainCamera.transform.position + gunOffset * 5.0f * mainCamera.transform.forward;
+        Vector3 pos = mainCamera.transform.position + GUN_OFFSET * 5.0f * mainCamera.transform.forward;
         pos.x += 1f;
         pos.y += 1f;
-        ammo.transform.position = pos;// + ammoOffset;
-        //ammo.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
+        ammo.transform.position = pos;
 
         Vector3 eulerAngles = mainCamera.transform.eulerAngles;
         eulerAngles.x -= 2.5f;

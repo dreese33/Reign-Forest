@@ -2425,10 +2425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4558bfbc62f8a9b47a34e45f7261c1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeedMobile: 3
-  rotateSpeedComputer: 10
-  invertPitch: 1
-  deltaOffset: 0.01
   maleCharacter: {fileID: 897643438}
   femaleCharacter: {fileID: 223974226}
   femaleTarget: {fileID: 1649291922}
@@ -2437,7 +2433,6 @@ MonoBehaviour:
   cameraPerspectiveEnabled: 1
   mainCamera: {fileID: 0}
   gun: {fileID: 525429007}
-  targetButton: {fileID: 1077143648}
   ammo: {fileID: 1384608442}
 --- !u!1 &969445412
 GameObject:
@@ -3034,6 +3029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombie: {fileID: 817741859}
   numberOfZombies: 0
+  wave: 1
 --- !u!4 &1350940508
 Transform:
   m_ObjectHideFlags: 0

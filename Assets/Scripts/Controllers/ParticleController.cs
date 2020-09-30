@@ -9,7 +9,6 @@ public class ParticleController : MonoBehaviour
     public ParticleSystem splatterParticles;
 
     List<ParticleCollisionEvent> collisionEvents;
-    private bool played = false;
     public GameObject generatorObject;
     private GenerateEnemies enemyGenerator;
 

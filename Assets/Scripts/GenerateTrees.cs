@@ -74,7 +74,7 @@ public class GenerateTrees : MonoBehaviour
 
     private void CharacterSelect()
     {
-        switch (CameraController.gender)
+        switch (PlayerController.gender)
         {
             case CharacterType.MALE:
                 character = GameObject.Find("MaleLowQuality");
