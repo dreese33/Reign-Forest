@@ -7,7 +7,6 @@ public class PauseMenuController : MonoBehaviour
 
     public Vector3 screenSize;
 
-    // Start is called before the first frame update
     void Start()
     {
         RectTransform rt = GetComponent<RectTransform>();

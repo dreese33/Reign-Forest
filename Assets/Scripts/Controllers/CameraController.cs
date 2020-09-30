@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 
 public enum CharacterType {
@@ -108,7 +105,7 @@ public class CameraController : MonoBehaviour
     }
 
 
-    private void UpdateOnMobile()
+    void UpdateOnMobile()
     {
         totalTouchCount = Mathf.Clamp(Input.touchCount, 1, 2);
         for (int i = 0; i < totalTouchCount; i++) {
@@ -122,7 +119,7 @@ public class CameraController : MonoBehaviour
     }
 
 
-    private void UpdateOnComputer()
+    void UpdateOnComputer()
     {
         UpdateCameraAngleComputer();
         UpdateCameraPosition();
@@ -130,7 +127,7 @@ public class CameraController : MonoBehaviour
     
 
 
-    private bool IsPointerOverUIObject() {
+    bool IsPointerOverUIObject() {
         //Implementation for mobile
         return EventSystem.current.IsPointerOverGameObject(touch.fingerId);
         //Implementation for computer
@@ -192,6 +189,19 @@ public class CameraController : MonoBehaviour
         gun.transform.eulerAngles = eulerAngles;
     }
 
+    public void UpdateTargetPosition()
+    {
+        Vector3 pos = mainCamera.transform.position + GUN_OFFSET * 5.0f * mainCamera.transform.forward;
+        pos.x += 1f;
+        pos.y += 1f;
+        ammo.transform.position = pos;
+
+        Vector3 eulerAngles = mainCamera.transform.eulerAngles;
+        eulerAngles.x -= 2.5f;
+        eulerAngles.y += 2.5f;
+        ammo.transform.eulerAngles = eulerAngles;
+    }
+
 
     void SetupMainCharacter()
     {
@@ -228,19 +238,5 @@ public class CameraController : MonoBehaviour
         Vector3 pos = femaleCharacter.transform.position;
         pos.x = 50;
         femaleCharacter.transform.position = pos;
-    }
-
-
-    public void UpdateTargetPosition()
-    {
-        Vector3 pos = mainCamera.transform.position + GUN_OFFSET * 5.0f * mainCamera.transform.forward;
-        pos.x += 1f;
-        pos.y += 1f;
-        ammo.transform.position = pos;
-
-        Vector3 eulerAngles = mainCamera.transform.eulerAngles;
-        eulerAngles.x -= 2.5f;
-        eulerAngles.y += 2.5f;
-        ammo.transform.eulerAngles = eulerAngles;
     }
 }

@@ -5,12 +5,18 @@ using UnityEngine;
 public class ParticleController : MonoBehaviour
 {
 
-    public ParticleSystem particleLauncher;
-    public ParticleSystem splatterParticles;
+    [SerializeField]
+    ParticleSystem particleLauncher;
+
+    [SerializeField]
+    ParticleSystem splatterParticles;
+
+    [SerializeField]
+    GameObject generatorObject;
 
     List<ParticleCollisionEvent> collisionEvents;
-    public GameObject generatorObject;
-    private GenerateEnemies enemyGenerator;
+    GenerateEnemies enemyGenerator;
+    
 
     void Start()
     {
@@ -26,17 +32,22 @@ public class ParticleController : MonoBehaviour
         for (int i = 0; i < collisionEvents.Count; i++)
         {
             SplatterParticles(collisionEvents[i]);
+            TestZombieCollision(otherObject);
+        }
+    }
 
-            if (otherObject.name.Contains("ZombieLowQuality"))
+
+    void TestZombieCollision(GameObject other)
+    {
+        if (other.name.Contains("ZombieLowQuality"))
+        {
+            ZombieController zombie = other.GetComponent<ZombieController>();
+            zombie.SubtractFromHealth(50);
+
+            if (zombie.GetHealth() <= 0)
             {
-                ZombieController zombie = otherObject.GetComponent<ZombieController>();
-                zombie.SubtractFromHealth(50);
-
-                if (zombie.GetHealth() <= 0)
-                {
-                    Destroy(otherObject);
-                    enemyGenerator.numberOfZombies--;
-                }
+                Destroy(other);
+                enemyGenerator.numberOfZombies--;
             }
         }
     }

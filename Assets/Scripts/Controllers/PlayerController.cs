@@ -9,22 +9,25 @@ public class PlayerController : MonoBehaviour
 
     enum CurrentAnimationState { IDLE, WALK, RUN };
 
-    private Animation anim;
-    private CameraController controller;
-    private CurrentAnimationState state;
-    private string genderAnimationString;
+    Animation anim;
+    CameraController controller;
+    CurrentAnimationState state;
+    string genderAnimationString;
+    float speed = 100.0f;
 
-    public Button forwardButton;
+    [SerializeField]
+    Button forwardButton;
+
     public GameObject character;
-    private float speed = 100.0f;
     public bool forwardPressed = false;
-    private bool computerMode = false;
+
+    //This needs to become global or static eventually
+    bool computerMode = false;
 
     //Statics
     public static CharacterType gender = CharacterType.FEMALE;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         CharacterSelect();
@@ -34,7 +37,6 @@ public class PlayerController : MonoBehaviour
         state = CurrentAnimationState.IDLE;
     }
 
-    // Update is called once per frame
     
     void Update()
     {
@@ -54,7 +56,6 @@ public class PlayerController : MonoBehaviour
                     anim.Play(genderAnimationString + "|Run");
                     pos.z += speed * Time.deltaTime;
                     character.transform.position = pos;
-                    //controller.UpdateGunPosition();
                     break;
             }
 
@@ -120,7 +121,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void CharacterSelect()
+    void CharacterSelect()
     {
         switch (PlayerController.gender)
         {

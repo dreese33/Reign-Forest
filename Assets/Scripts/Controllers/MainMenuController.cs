@@ -5,10 +5,16 @@ using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
-    public Text text;
-    public Slider progressBar;
-    public GameObject progressCanvas;
-    private bool loading = false;
+    [SerializeField]
+    Text text;
+
+    [SerializeField]
+    Slider progressBar;
+
+    [SerializeField]
+    GameObject progressCanvas;
+
+    bool loading = false;
 
     void Start()
     {
@@ -52,7 +58,7 @@ public class MainMenuController : MonoBehaviour
     IEnumerator LoadCharacterSelect()
     {
         progressCanvas.SetActive(true);
-        AsyncOperation loadScene = SceneManager.LoadSceneAsync("Inventory", LoadSceneMode.Single);
+        AsyncOperation loadScene = SceneManager.LoadSceneAsync("CharacterSelect", LoadSceneMode.Single);
 
         while (!loadScene.isDone)
         {
