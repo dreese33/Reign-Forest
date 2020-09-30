@@ -52,7 +52,7 @@ public class MainMenuController : MonoBehaviour
     IEnumerator LoadCharacterSelect()
     {
         progressCanvas.SetActive(true);
-        AsyncOperation loadScene = SceneManager.LoadSceneAsync("CharacterSelect", LoadSceneMode.Single);
+        AsyncOperation loadScene = SceneManager.LoadSceneAsync("Inventory", LoadSceneMode.Single);
 
         while (!loadScene.isDone)
         {

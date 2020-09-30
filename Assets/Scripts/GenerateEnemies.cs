@@ -12,10 +12,12 @@ public class GenerateEnemies : MonoBehaviour
     public GameObject zombie;
     private int currentSpawnValue = 20;
     public int numberOfZombies = 0;
+    private float minSpawnTime = 0.0f;
+    private float maxSpawnTime = 1.5f;
 
     void Start()
     {
-        StartZombieSpawner();
+        StartCoroutine("StartZombieSpawner");
     }
 
 
@@ -25,7 +27,7 @@ public class GenerateEnemies : MonoBehaviour
         {
             if (numberOfZombies == 1 && !beingHandled)
             {
-                StartZombieSpawner();
+                StartCoroutine("StartZombieSpawner");
             }
         }
     }
@@ -35,9 +37,15 @@ public class GenerateEnemies : MonoBehaviour
     {
         beingHandled = true;
 
-        for (int i = 0; i < iters; i++)
+        for (int i = 0; i < iters + 1; i++)
         {
-            AddZombieToGame(i);
+            if (i == 0)
+            {
+                Debug.Log("New wave " + maxSpawnTime);
+                yield return new WaitForSeconds(10.0f);
+                continue;
+            }
+            AddZombieToGame(i - 1);
             yield return new WaitForSeconds(RandomNumberSeconds());
         }
 
@@ -64,13 +72,29 @@ public class GenerateEnemies : MonoBehaviour
 
     private float RandomNumberSeconds()
     {
-        return Random.Range(0.0f, 1.5f);
+        return Random.Range(minSpawnTime, maxSpawnTime);
     }
 
 
     private void StartZombieSpawner()
     {
-        SpawnZombies(1);
+        UpdateSpawnTimes();
         StartCoroutine(SpawnZombiesDelay(currentSpawnValue));
+    }
+
+
+    //Update this every new wave of zombies
+    private void UpdateSpawnTimes()
+    {
+        if (maxSpawnTime > 0.5)
+        {
+            maxSpawnTime -= 0.1f;
+        }
+    }
+
+
+    public int GetWaveNumber()
+    {
+        return (int) levelOfDifficulty;
     }
 }
