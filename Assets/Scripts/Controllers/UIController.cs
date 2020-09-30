@@ -1,23 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class UIController : MonoBehaviour
 {
 
-    public GameObject gunsObjectView;
+    ScrollRect gunsScrollRect;
     public bool gunsObjectViewShowing;
-    private ScrollRect gunsScrollRect;
 
-    public Button gunsButton;
-    public Sprite gunsButtonSprite;
-    public Sprite gunsButtonSpriteFlip;
+    [SerializeField]
+    GameObject gunsObjectView;
+
+    [SerializeField]
+    Button gunsButton;
+
+    [SerializeField]
+    Sprite gunsButtonSprite;
+
+    [SerializeField]
+    Sprite gunsButtonSpriteFlip;
 
     void Start()
     {
-
         //Set invisible scroll bar at beginning of game
         gunsObjectViewShowing = false;
         gunsObjectView.gameObject.SetActive(false);

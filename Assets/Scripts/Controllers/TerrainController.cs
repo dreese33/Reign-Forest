@@ -1,24 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TerrainController : MonoBehaviour
 {
+    [SerializeField]
+    Terrain terrain;
 
-    //Add texture to Terrain
-    //https://answers.unity.com/questions/538769/change-and-add-terrain-texture-during-runtime.html
-
-
-    public Terrain terrain;
-    private static Terrain terrainObj;
+    static Terrain terrainObj;
 
     //The total number of terrain objects rendered
     public int terrainCount = 0;
-    private float terrainLength;
-    private PlayerController player;
-    private static bool firstIter = true;
 
-    // Start is called before the first frame update
+    float terrainLength;
+    PlayerController player;
+    static bool firstIter = true;
+
     void Start()
     {
         terrain.allowAutoConnect = true;
@@ -26,7 +21,6 @@ public class TerrainController : MonoBehaviour
         terrainLength = terrain.terrainData.size.z;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (player.forwardPressed)
@@ -51,7 +45,6 @@ public class TerrainController : MonoBehaviour
     {
         Debug.Log("Add new terrain");
         terrainCount++;
-
         CreateNewTerrain();
     }
 
@@ -60,28 +53,37 @@ public class TerrainController : MonoBehaviour
     {
         if (firstIter)
         {
-            firstIter = false;
-            terrainObj = Instantiate(terrain, new Vector3(0, 0, 1000), Quaternion.identity);
-            terrainObj.name = "TerrainObj" + terrainCount;
-            Debug.Log("Another one created");
+            AddTerrain();
         } else
         {
             if (terrainCount % 2 == 0)
             {
                 Debug.Log("Moved terrain");
-                Terrain terrainNow = GameObject.Find("Terrain").GetComponent<Terrain>();
-                Vector3 terrainPos = terrainNow.transform.position;
-                terrainPos.z = terrainCount * terrainLength;
-                terrainNow.transform.position = terrainPos;
+                MoveTerrain("Terrain");
             } else
             {
                 Debug.Log("Moved obj");
-                Terrain terrainNow = GameObject.Find("TerrainObj1").GetComponent<Terrain>();
-                Vector3 terrainPos = terrainNow.transform.position;
-                terrainPos.z = terrainCount * terrainLength;
-                terrainNow.transform.position = terrainPos;
+                MoveTerrain("TerrainObj1");
             }
         }
+    }
+
+
+    void AddTerrain()
+    {
+        firstIter = false;
+        terrainObj = Instantiate(terrain, new Vector3(0, 0, 1000), Quaternion.identity);
+        terrainObj.name = "TerrainObj" + terrainCount;
+        Debug.Log("Another one created");
+    }
+
+
+    void MoveTerrain(string terrainName)
+    {
+        Terrain terrainNow = GameObject.Find(terrainName).GetComponent<Terrain>();
+        Vector3 terrainPos = terrainNow.transform.position;
+        terrainPos.z = terrainCount * terrainLength;
+        terrainNow.transform.position = terrainPos;
     }
 
 

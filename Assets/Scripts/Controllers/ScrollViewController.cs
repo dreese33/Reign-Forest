@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ScrollViewController : MonoBehaviour
 {
-    private CameraController controller;
+    CameraController controller;
 
     void Start()
     {

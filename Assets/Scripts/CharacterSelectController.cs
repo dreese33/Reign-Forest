@@ -1,19 +1,25 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class CharacterSelectController : MonoBehaviour
 {
+    [SerializeField]
+    Button maleButton;
 
-    public Button maleButton;
-    public Button femaleButton;
-    public Slider progressBar;
-    public GameObject progressCanvas;
-    private bool loading = false;
+    [SerializeField]
+    Button femaleButton;
 
-    // Start is called before the first frame update
+    [SerializeField]
+    Slider progressBar;
+
+    [SerializeField]
+    GameObject progressCanvas;
+
+    bool loading = false;
+
+
     void Start()
     {
         progressCanvas.SetActive(false);

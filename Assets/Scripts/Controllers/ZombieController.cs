@@ -1,22 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ZombieController : MonoBehaviour
 {
-    private Animation anim;
-    private CameraController controller;
-    private float speed = 0.0f;
-    private readonly float rotateSpeed = 20.0f;
-    public GameObject male;
-    public GameObject female;
-    private GameObject player;
-    private float rand;
-    private int health;
-    private bool rootZombie = false;
+    Animation anim;
+    CameraController controller;
+    float speed = 0.0f;
+    GameObject player;
+    float rand;
+    int health;
+    bool rootZombie = false;
+
+    [SerializeField]
+    GameObject male;
+
+    [SerializeField]
+    GameObject female;
+
+    //Constants
+    readonly float ROTATE_SPEED = 20.0f;
 
     //Health bar
-    public GameObject healthBar;
+    [SerializeField]
+    GameObject healthBar;
 
 
     void Start()
@@ -34,7 +39,6 @@ public class ZombieController : MonoBehaviour
         anim = gameObject.GetComponent<Animation>();
         controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
         transform.position = GetRandomPosition();
-        //speed = GetRandomSpeed();
         health = GetRandomHealth();
 
         if (name == "ZombieLowQuality")
@@ -103,14 +107,20 @@ public class ZombieController : MonoBehaviour
         {
             if (transform.eulerAngles.y < optimalAngle)
             {
-                rotation.y += rotateSpeed * Time.deltaTime;
+                rotation.y += ROTATE_SPEED * Time.deltaTime;
             } else
             {
-                rotation.y -= rotateSpeed * Time.deltaTime;
+                rotation.y -= ROTATE_SPEED * Time.deltaTime;
             }
         }
 
         transform.eulerAngles = rotation;
+    }
+
+
+    int GetRandomHealth()
+    {
+        return Random.Range(50, 150);
     }
 
 
@@ -124,12 +134,6 @@ public class ZombieController : MonoBehaviour
     public int GetHealth()  
     {
         return health;
-    }
-
-
-    private int GetRandomHealth()
-    {
-        return Random.Range(50, 150);
     }
 
 
