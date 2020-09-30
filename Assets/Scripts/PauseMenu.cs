@@ -1,22 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    Button pauseButton;
 
-    public Button pauseButton;
-    public Button resumeButton;
-    public GameObject pauseMenuUI;
-    public GameObject gameUI;
+    [SerializeField]
+    Button resumeButton;
+
+    [SerializeField]
+    GameObject pauseMenuUI;
+
+    [SerializeField]
+    GameObject gameUI;
+
     public bool gameIsPaused = false;
     public Camera menuCamera;
     public Camera mainCamera;
-    //private PlayerController character;
 
-    private float distance = 25.0f;
+    float distance = 25.0f;
 
     void Start()
     {

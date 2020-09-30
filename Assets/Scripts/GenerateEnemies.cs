@@ -1,27 +1,29 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GenerateEnemies : MonoBehaviour
 {
-    private bool beingHandled = false;
-
     //Replace with pooling later
-    public GameObject zombie;
-    private int currentSpawnValue = 20;
+    [SerializeField]
+    GameObject zombie;
+
+    int currentSpawnValue = 20;
+    bool beingHandled = false;
+    
+    //Game progression values
+    float minSpawnTime = 0.0f;
+    float maxSpawnTime = 1.5f;
+    float currentMinSpeed = 5.0f;
+    float currentMaxSpeed = 15.0f;
+
     public int numberOfZombies = 0;
     public int wave = 1;
 
-    //Game progression values
-    private float minSpawnTime = 0.0f;
-    private float maxSpawnTime = 1.5f;
-    private float currentMinSpeed = 5.0f;
-    private float currentMaxSpeed = 15.0f;
-
-    private readonly float SMALLEST_MAX_SPAWN_TIME = 0.5f;
-    private readonly float MAX_SPEED = 50.0f;
-    private readonly float MIN_SPEED = 30.0f;
-    private readonly float TIME_BETWEEN_WAVES = 5.0f;
+    //Constants
+    readonly float SMALLEST_MAX_SPAWN_TIME = 0.5f;
+    readonly float MAX_SPEED = 50.0f;
+    readonly float MIN_SPEED = 30.0f;
+    readonly float TIME_BETWEEN_WAVES = 5.0f;
 
     void Start()
     {
@@ -41,7 +43,7 @@ public class GenerateEnemies : MonoBehaviour
     }
 
 
-    private IEnumerator SpawnZombiesDelay(int iters)
+    IEnumerator SpawnZombiesDelay(int iters)
     {
         beingHandled = true;
 
@@ -61,7 +63,7 @@ public class GenerateEnemies : MonoBehaviour
     }
 
 
-    private void SpawnZombies(int iters)
+    void SpawnZombies(int iters)
     {
         for (int i = 0; i < iters; i++)
         {
@@ -70,7 +72,7 @@ public class GenerateEnemies : MonoBehaviour
     }
 
 
-    private void AddZombieToGame(int identifier)
+    void AddZombieToGame(int identifier)
     {
         GameObject newZombie = Instantiate(zombie);
         newZombie.name = "ZombieLowQuality" + identifier;
@@ -82,13 +84,13 @@ public class GenerateEnemies : MonoBehaviour
     }
 
 
-    private float RandomNumberSeconds()
+    float RandomNumberSeconds()
     {
         return Random.Range(minSpawnTime, maxSpawnTime);
     }
 
 
-    private void StartZombieSpawner()
+    void StartZombieSpawner()
     {
         UpdateSpawnTimes();
         UpdateSpeeds();
@@ -104,7 +106,7 @@ public class GenerateEnemies : MonoBehaviour
 
 
     //Update the following functions every new wave of zombies
-    private void UpdateSpawnTimes()
+    void UpdateSpawnTimes()
     {
         if (maxSpawnTime > SMALLEST_MAX_SPAWN_TIME)
         {
@@ -113,13 +115,13 @@ public class GenerateEnemies : MonoBehaviour
     }
 
 
-    private void UpdateWaveValues()
+    void UpdateWaveValues()
     {
         wave += 1;
     }
 
 
-    private void UpdateSpeeds()
+    void UpdateSpeeds()
     {
         if (currentMaxSpeed <= MAX_SPEED)
         {
