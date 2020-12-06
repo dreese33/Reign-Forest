@@ -41,7 +41,7 @@ public class ParticleController : MonoBehaviour
         if (other.name.Contains("ZombieLowQuality"))
         {
             ZombieController zombie = other.GetComponent<ZombieController>();
-            zombie.SubtractFromHealth(50);
+            zombie.UpdateHealth(50);
 
             if (zombie.GetHealth() <= 0)
             {

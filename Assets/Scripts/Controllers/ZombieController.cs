@@ -8,6 +8,9 @@ public class ZombieController : MonoBehaviour
     GameObject player;
     float rand;
     int health;
+    private float healthPercent = 1.0f;
+    private float originalScale = 2.0f;
+    private float maxHealth;
     bool rootZombie = false;
 
     [SerializeField]
@@ -40,6 +43,7 @@ public class ZombieController : MonoBehaviour
         controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
         transform.position = GetRandomPosition();
         health = GetRandomHealth();
+        maxHealth = health;
 
         if (name == "ZombieLowQuality")
         {
@@ -124,10 +128,17 @@ public class ZombieController : MonoBehaviour
     }
 
 
-    public void SubtractFromHealth(int damage)
+    public void UpdateHealth(int damage)
     {
+        //Update health values
         health -= damage;
+        healthPercent = health / maxHealth;
+
         //Update health bar
+        //healthBar.GetComponent<Renderer>().material.SetFloat("_Percent", healthPercent);
+        Vector3 scale = healthBar.transform.localScale;
+        scale.x = healthPercent * originalScale;
+        healthBar.transform.localScale = scale;
     }
 
 
