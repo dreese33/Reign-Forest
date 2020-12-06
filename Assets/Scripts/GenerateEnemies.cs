@@ -24,9 +24,14 @@ public class GenerateEnemies : MonoBehaviour
     readonly float MAX_SPEED = 50.0f;
     readonly float MIN_SPEED = 30.0f;
     readonly float TIME_BETWEEN_WAVES = 5.0f;
+    readonly int MAX_NUM_ZOMBIES = 100;
+
+    //Pooling
+    ObjectPooler objectPooler;
 
     void Start()
     {
+        objectPooler = ObjectPooler.Instance;
         StartCoroutine("StartZombieSpawner");
     }
 
@@ -74,7 +79,7 @@ public class GenerateEnemies : MonoBehaviour
 
     void AddZombieToGame(int identifier)
     {
-        GameObject newZombie = Instantiate(zombie);
+        GameObject newZombie = objectPooler.SpawnFromPool("Zombie"); //Instantiate(zombie);
         newZombie.name = "ZombieLowQuality" + identifier;
         
         ZombieController zombieController = newZombie.GetComponent<ZombieController>();

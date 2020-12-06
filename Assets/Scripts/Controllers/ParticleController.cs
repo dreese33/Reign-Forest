@@ -16,9 +16,12 @@ public class ParticleController : MonoBehaviour
     List<ParticleCollisionEvent> collisionEvents;
     GenerateEnemies enemyGenerator;
     
+    //Pooling
+    ObjectPooler objectPooler;
 
     void Start()
     {
+        objectPooler = ObjectPooler.Instance;
         collisionEvents = new List<ParticleCollisionEvent>();
         enemyGenerator = generatorObject.GetComponent<GenerateEnemies>();
     }
@@ -45,7 +48,8 @@ public class ParticleController : MonoBehaviour
 
             if (zombie.GetHealth() <= 0)
             {
-                Destroy(other);
+                //Destroy(other);
+                objectPooler.ReleaseToPool(other, "Zombie");
                 enemyGenerator.numberOfZombies--;
             }
         }
