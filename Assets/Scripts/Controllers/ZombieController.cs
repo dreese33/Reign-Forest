@@ -21,6 +21,7 @@ public class ZombieController : MonoBehaviour, IPooledObject
 
     //Constants
     readonly float ROTATE_SPEED = 20.0f;
+    private readonly Quaternion DEFAULT_ROTATION = new Quaternion(0.0f, 180.0f, 0.0f, 1.0f);
 
     //Health bar
     [SerializeField]
@@ -42,6 +43,7 @@ public class ZombieController : MonoBehaviour, IPooledObject
         
         controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
         transform.position = GetRandomPosition();
+        transform.rotation = DEFAULT_ROTATION;
         health = GetRandomHealth();
         maxHealth = health;
 
