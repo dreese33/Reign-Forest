@@ -39,6 +39,7 @@ public class ZombieController : MonoBehaviour, IPooledObject
         }
 
         anim = gameObject.GetComponent<Animation>();
+        
         controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
         transform.position = GetRandomPosition();
         health = GetRandomHealth();
@@ -51,33 +52,6 @@ public class ZombieController : MonoBehaviour, IPooledObject
             rootZombie = true;
         }
     }
-
-/*
-    void Start()
-    {
-        switch (PlayerController.gender)
-        {
-            case CharacterType.MALE:
-                player = male;
-                break;
-            case CharacterType.FEMALE:
-                player = female;
-                break;
-        }
-
-        anim = gameObject.GetComponent<Animation>();
-        controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
-        transform.position = GetRandomPosition();
-        health = GetRandomHealth();
-        maxHealth = health;
-
-        if (name == "ZombieLowQuality")
-        {
-            //Out of sight out of mind
-            transform.position = new Vector3(-100.0f, transform.position.y, -100.0f);
-            rootZombie = true;
-        }
-    }*/
 
 
     void Update()
