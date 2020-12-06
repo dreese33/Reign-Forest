@@ -19,6 +19,7 @@ public class ParticleController : MonoBehaviour
     //Pooling
     ObjectPooler objectPooler;
 
+
     void Start()
     {
         objectPooler = ObjectPooler.Instance;
@@ -27,15 +28,12 @@ public class ParticleController : MonoBehaviour
     }
 
 
-    void OnParticleCollision(GameObject other)
+    void SplatterParticles(ParticleCollisionEvent collisionEvent)
     {
-        GameObject otherObject = other.transform.root.gameObject;
-        ParticlePhysicsExtensions.GetCollisionEvents(particleLauncher, other, collisionEvents);
-        for (int i = 0; i < collisionEvents.Count; i++)
-        {
-            SplatterParticles(collisionEvents[i]);
-            TestZombieCollision(otherObject);
-        }
+        splatterParticles.transform.position = collisionEvent.intersection;
+        splatterParticles.transform.rotation = Quaternion.LookRotation(collisionEvent.normal);
+        splatterParticles.Clear();
+        splatterParticles.Play();
     }
 
 
@@ -56,11 +54,14 @@ public class ParticleController : MonoBehaviour
     }
 
 
-    void SplatterParticles(ParticleCollisionEvent collisionEvent)
+    void OnParticleCollision(GameObject other)
     {
-        splatterParticles.transform.position = collisionEvent.intersection;
-        splatterParticles.transform.rotation = Quaternion.LookRotation(collisionEvent.normal);
-        splatterParticles.Clear();
-        splatterParticles.Play();
+        GameObject otherObject = other.transform.root.gameObject;
+        ParticlePhysicsExtensions.GetCollisionEvents(particleLauncher, other, collisionEvents);
+        for (int i = 0; i < collisionEvents.Count; i++)
+        {
+            SplatterParticles(collisionEvents[i]);
+            TestZombieCollision(otherObject);
+        }
     }
 }

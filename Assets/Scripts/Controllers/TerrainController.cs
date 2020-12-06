@@ -14,26 +14,6 @@ public class TerrainController : MonoBehaviour
     PlayerController player;
     static bool firstIter = true;
 
-    void Start()
-    {
-        terrain.allowAutoConnect = true;
-        player = GameObject.Find("ForwardButton").GetComponent<PlayerController>();
-        terrainLength = terrain.terrainData.size.z;
-    }
-
-    void Update()
-    {
-        if (player.forwardPressed)
-        {
-            float playerPosition = GetPlayerPosition();
-            
-            if (playerPosition > 0)
-            {
-                AddNewTerrain();
-            }
-        }
-    }
-
 
     float GetPlayerPosition()
     {
@@ -41,11 +21,28 @@ public class TerrainController : MonoBehaviour
     }
 
 
-    void AddNewTerrain()
+    void AddTerrain()
     {
-        Debug.Log("Add new terrain");
-        terrainCount++;
-        CreateNewTerrain();
+        firstIter = false;
+        terrainObj = Instantiate(terrain, new Vector3(0, 0, 1000), Quaternion.identity);
+        terrainObj.name = "TerrainObj" + terrainCount;
+        Debug.Log("Another one created");
+    }
+
+
+    void MoveTerrain(string terrainName)
+    {
+        Terrain terrainNow = GameObject.Find(terrainName).GetComponent<Terrain>();
+        Vector3 terrainPos = terrainNow.transform.position;
+        terrainPos.z = terrainCount * terrainLength;
+        terrainNow.transform.position = terrainPos;
+    }
+
+
+    //This is essentially pooled, so this function is never really called
+    void DestroyTerrain()
+    {
+        Destroy(GameObject.Find("TerrainObj" + (terrainCount - 2)));
     }
 
 
@@ -69,26 +66,32 @@ public class TerrainController : MonoBehaviour
     }
 
 
-    void AddTerrain()
+    void AddNewTerrain()
     {
-        firstIter = false;
-        terrainObj = Instantiate(terrain, new Vector3(0, 0, 1000), Quaternion.identity);
-        terrainObj.name = "TerrainObj" + terrainCount;
-        Debug.Log("Another one created");
+        Debug.Log("Add new terrain");
+        terrainCount++;
+        CreateNewTerrain();
     }
 
 
-    void MoveTerrain(string terrainName)
+    void Start()
     {
-        Terrain terrainNow = GameObject.Find(terrainName).GetComponent<Terrain>();
-        Vector3 terrainPos = terrainNow.transform.position;
-        terrainPos.z = terrainCount * terrainLength;
-        terrainNow.transform.position = terrainPos;
+        terrain.allowAutoConnect = true;
+        player = GameObject.Find("ForwardButton").GetComponent<PlayerController>();
+        terrainLength = terrain.terrainData.size.z;
     }
+    
 
-
-    void DestroyTerrain()
+    void Update()
     {
-        Destroy(GameObject.Find("TerrainObj" + (terrainCount - 2)));
+        if (player.forwardPressed)
+        {
+            float playerPosition = GetPlayerPosition();
+            
+            if (playerPosition > 0)
+            {
+                AddNewTerrain();
+            }
+        }
     }
 }

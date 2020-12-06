@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-
     ScrollRect gunsScrollRect;
     public bool gunsObjectViewShowing;
 
@@ -18,28 +17,6 @@ public class UIController : MonoBehaviour
 
     [SerializeField]
     Sprite gunsButtonSpriteFlip;
-
-    void Start()
-    {
-        //Set invisible scroll bar at beginning of game
-        gunsObjectViewShowing = false;
-        gunsObjectView.gameObject.SetActive(false);
-        gunsScrollRect = gunsObjectView.GetComponent<ScrollRect>();
-
-        //Setup gunsbutton action listener
-        gunsButton.onClick.AddListener(UpdateGunsView);
-    }
-
-
-    void UpdateGunsView()
-    {
-        if (gunsObjectViewShowing) 
-        {
-            DisableGunsView();
-        } else {
-            EnableGunsView();
-        }
-    }
 
 
     void EnableGunsView()
@@ -65,5 +42,28 @@ public class UIController : MonoBehaviour
 
         gunsObjectViewShowing = false;
         gunsObjectView.gameObject.SetActive(false);
+    }
+
+
+    void UpdateGunsView()
+    {
+        if (gunsObjectViewShowing) 
+        {
+            DisableGunsView();
+        } else {
+            EnableGunsView();
+        }
+    }
+
+
+    void Start()
+    {
+        //Set invisible scroll bar at beginning of game
+        gunsObjectViewShowing = false;
+        gunsObjectView.gameObject.SetActive(false);
+        gunsScrollRect = gunsObjectView.GetComponent<ScrollRect>();
+
+        //Setup gunsbutton action listener
+        gunsButton.onClick.AddListener(UpdateGunsView);
     }
 }

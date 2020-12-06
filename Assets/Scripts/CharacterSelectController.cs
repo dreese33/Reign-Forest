@@ -20,25 +20,6 @@ public class CharacterSelectController : MonoBehaviour
     bool loading = false;
 
 
-    void Start()
-    {
-        progressCanvas.SetActive(false);
-        maleButton.onClick.AddListener(SelectMale);
-        femaleButton.onClick.AddListener(SelectFemale);
-    }
-
-
-    void SelectMale()
-    {
-        if (!loading)
-        {
-            PlayerController.gender = CharacterType.MALE;
-            StartCoroutine(LoadCharacter());
-            loading = true;
-        }
-    }
-
-
     IEnumerator LoadCharacter()
     {
         progressCanvas.SetActive(true);
@@ -58,6 +39,17 @@ public class CharacterSelectController : MonoBehaviour
     }
 
 
+    void SelectMale()
+    {
+        if (!loading)
+        {
+            PlayerController.gender = CharacterType.MALE;
+            StartCoroutine(LoadCharacter());
+            loading = true;
+        }
+    }
+
+
     void SelectFemale()
     {
         if (!loading)
@@ -66,5 +58,13 @@ public class CharacterSelectController : MonoBehaviour
             StartCoroutine(LoadCharacter());
             loading = true;
         }
+    }
+
+
+    void Start()
+    {
+        progressCanvas.SetActive(false);
+        maleButton.onClick.AddListener(SelectMale);
+        femaleButton.onClick.AddListener(SelectFemale);
     }
 }

@@ -4,10 +4,6 @@ public class ScrollViewController : MonoBehaviour
 {
     CameraController controller;
 
-    void Start()
-    {
-        controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
-    }
 
     public void BeginDraging()
     {
@@ -18,5 +14,11 @@ public class ScrollViewController : MonoBehaviour
     public void EndDraging()
     {
         controller.cameraPerspectiveEnabled = true;
+    }
+
+
+    void Start()
+    {
+        controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
     }
 }

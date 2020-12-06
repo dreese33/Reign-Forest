@@ -21,11 +21,12 @@ public class PauseMenu : MonoBehaviour
 
     float distance = 25.0f;
 
-    void Start()
+
+    void UpdatePauseMenuLocation()
     {
-        pauseButton.onClick.AddListener(Pause);
-        resumeButton.onClick.AddListener(Resume);
-        pauseMenuUI.SetActive(false);
+        pauseMenuUI.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
+        pauseMenuUI.transform.eulerAngles = mainCamera.transform.eulerAngles;
+        pauseMenuUI.transform.position = mainCamera.transform.position + mainCamera.transform.forward * distance;
     }
 
     
@@ -67,10 +68,10 @@ public class PauseMenu : MonoBehaviour
     }
 
 
-    void UpdatePauseMenuLocation()
+    void Start()
     {
-        pauseMenuUI.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y, 0.0f, mainCamera.transform.rotation.w);
-        pauseMenuUI.transform.eulerAngles = mainCamera.transform.eulerAngles;
-        pauseMenuUI.transform.position = mainCamera.transform.position + mainCamera.transform.forward * distance;
+        pauseButton.onClick.AddListener(Pause);
+        resumeButton.onClick.AddListener(Resume);
+        pauseMenuUI.SetActive(false);
     }
 }

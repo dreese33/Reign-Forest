@@ -18,6 +18,19 @@ public class GunController : MonoBehaviour
     ParticleSystem ammo;
 
 
+    void SetupParticleSystem()
+    {
+        ammo.Pause();
+    }
+
+
+    void OnFire()
+    {
+        audioSource.PlayOneShot(laserNoise1);
+        ammo.Emit(1);
+    }
+
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -37,18 +50,5 @@ public class GunController : MonoBehaviour
         {
             OnFire();
         }
-    }
-
-
-    void OnFire()
-    {
-        audioSource.PlayOneShot(laserNoise1);
-        ammo.Emit(1);
-    }
-
-    
-    void SetupParticleSystem()
-    {
-        ammo.Pause();
     }
 }

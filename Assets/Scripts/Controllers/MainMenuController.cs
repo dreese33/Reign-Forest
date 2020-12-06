@@ -16,25 +16,6 @@ public class MainMenuController : MonoBehaviour
 
     bool loading = false;
 
-    void Start()
-    {
-        progressCanvas.SetActive(false);
-        StartBlinking();
-    }
-
-
-    void Update()
-    {
-        if (Input.touchCount >= 1 || Input.GetMouseButtonDown(0))
-        {
-            if (!loading)
-            {
-                StartCoroutine(LoadCharacterSelect());
-                loading = true;
-            }
-        }
-    }
-
 
     IEnumerator Blink()
     {
@@ -83,5 +64,25 @@ public class MainMenuController : MonoBehaviour
     void StopBlinking()
     {
         StopCoroutine("Blink");
+    }
+
+
+    void Start()
+    {
+        progressCanvas.SetActive(false);
+        StartBlinking();
+    }
+
+
+    void Update()
+    {
+        if (Input.touchCount >= 1 || Input.GetMouseButtonDown(0))
+        {
+            if (!loading)
+            {
+                StartCoroutine(LoadCharacterSelect());
+                loading = true;
+            }
+        }
     }
 }

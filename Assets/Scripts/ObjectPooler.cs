@@ -23,25 +23,11 @@ public class ObjectPooler : MonoBehaviour
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
-    void Start() {
-        poolDictionary = new Dictionary<string, Queue<GameObject>>();
-
-        //Initial objects in pool - based on wave number
-        foreach (Pool pool in pools) {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
-            for (int i = 0; i < pool.maxSize; i++) {
-                GameObject obj = Instantiate(pool.prefab);
-                obj.SetActive(false);
-                objectPool.Enqueue(obj);
-            }
-
-            poolDictionary.Add(pool.tag, objectPool);
-        }
-    }
 
     private void PrintMissingTagWarning(string tag) {
         Debug.LogWarning("Pool with tag " + tag + " doesn't exist");
     }
+
 
     public GameObject SpawnFromPool(string tag) {
         if (!poolDictionary.ContainsKey(tag)) {
@@ -58,11 +44,9 @@ public class ObjectPooler : MonoBehaviour
             pooledObj.OnObjectSpawn();
         }
 
-        //Returns object to pool
-        //poolDictionary[tag].Enqueue(objectToSpawn);
-
         return objectToSpawn;
     }
+    
 
     public void ReleaseToPool(GameObject obj, string tag) {
         if (!poolDictionary.ContainsKey(tag)) {
@@ -72,5 +56,22 @@ public class ObjectPooler : MonoBehaviour
 
         obj.SetActive(false);
         poolDictionary[tag].Enqueue(obj);
+    }
+
+
+    void Start() {
+        poolDictionary = new Dictionary<string, Queue<GameObject>>();
+
+        //Initial objects in pool - based on wave number
+        foreach (Pool pool in pools) {
+            Queue<GameObject> objectPool = new Queue<GameObject>();
+            for (int i = 0; i < pool.maxSize; i++) {
+                GameObject obj = Instantiate(pool.prefab);
+                obj.SetActive(false);
+                objectPool.Enqueue(obj);
+            }
+
+            poolDictionary.Add(pool.tag, objectPool);
+        }
     }
 }

@@ -25,6 +25,70 @@ public class PlayerController : MonoBehaviour
     public static CharacterType gender = CharacterType.FEMALE;
 
 
+    void CharacterSelect()
+    {
+        switch (PlayerController.gender)
+        {
+            case CharacterType.MALE:
+                character = GameObject.Find("MaleLowQuality");
+                genderAnimationString = "Male_game_character";
+                break;
+            case CharacterType.FEMALE:
+                character = GameObject.Find("FemaleLowFrames");
+                genderAnimationString = "Female";
+                break;
+        }
+    }
+
+
+    public void BeginForward()
+    {
+        if (!computerMode)
+        {
+            forwardPressed = true;
+            anim.Stop();
+            state = CurrentAnimationState.RUN;
+        }
+    }
+
+
+    public void EndForward()
+    {
+        if (!computerMode)
+        {
+            forwardPressed = false;
+            anim.Stop();
+            state = CurrentAnimationState.IDLE;
+        }
+    }
+
+
+    void BeginForwardArrow()
+    {
+        computerMode = true;
+        if (!forwardPressed)
+        {
+            forwardButton.interactable = false;
+            anim.Stop();
+            state = CurrentAnimationState.RUN;
+            forwardPressed = true;
+        }
+    }
+
+
+    void EndForwardArrow()
+    {
+        if (forwardPressed)
+        {
+            forwardButton.interactable = true;
+            anim.Stop();
+            state = CurrentAnimationState.IDLE;
+            forwardPressed = false;
+        }
+        computerMode = false;
+    }
+
+
     void Start()
     {
         CharacterSelect();
@@ -66,70 +130,6 @@ public class PlayerController : MonoBehaviour
             {
                 EndForwardArrow();
             }
-        }
-    }
-
-
-    void BeginForwardArrow()
-    {
-        computerMode = true;
-        if (!forwardPressed)
-        {
-            forwardButton.interactable = false;
-            anim.Stop();
-            state = CurrentAnimationState.RUN;
-            forwardPressed = true;
-        }
-    }
-
-
-    void EndForwardArrow()
-    {
-        if (forwardPressed)
-        {
-            forwardButton.interactable = true;
-            anim.Stop();
-            state = CurrentAnimationState.IDLE;
-            forwardPressed = false;
-        }
-        computerMode = false;
-    }
-
-    
-    public void BeginForward()
-    {
-        if (!computerMode)
-        {
-            forwardPressed = true;
-            anim.Stop();
-            state = CurrentAnimationState.RUN;
-        }
-    }
-
-
-    public void EndForward()
-    {
-        if (!computerMode)
-        {
-            forwardPressed = false;
-            anim.Stop();
-            state = CurrentAnimationState.IDLE;
-        }
-    }
-
-
-    void CharacterSelect()
-    {
-        switch (PlayerController.gender)
-        {
-            case CharacterType.MALE:
-                character = GameObject.Find("MaleLowQuality");
-                genderAnimationString = "Male_game_character";
-                break;
-            case CharacterType.FEMALE:
-                character = GameObject.Find("FemaleLowFrames");
-                genderAnimationString = "Female";
-                break;
         }
     }
 }

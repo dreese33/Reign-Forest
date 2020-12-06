@@ -62,76 +62,49 @@ public class CameraController : MonoBehaviour
     public static bool PlayerAlive = true;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Manually set character type here
-        mainCamera = Camera.main;
-        SetupMainCharacter();
-
-        UpdateCameraPosition();
-        UpdateGunPosition();
-
-        UpdateCameraAngleMobile();
-        UpdateCameraAngleComputer();
-
-        UpdateTargetPosition();
-
-        //Disable gun for now
-        gun.SetActive(false);
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (PlayerAlive == true)
-        {
-            if (cameraPerspectiveEnabled) 
-            {
-                if (Input.touchCount > 0)
-                {
-                    UpdateOnMobile();
-                } else if (Input.GetKey(KeyCode.Mouse0))
-                {
-                    UpdateOnComputer();
-                } else
-                {
-                    lastPos = Vector3.zero;
-                    return;
-                }
-            }
-        }
-    }
-
-
-    void UpdateOnMobile()
-    {
-        totalTouchCount = Mathf.Clamp(Input.touchCount, 1, 2);
-        for (int i = 0; i < totalTouchCount; i++) {
-            touch = Input.GetTouch(i);
-            if (touch.phase == TouchPhase.Moved && !IsPointerOverUIObject()) 
-            {
-                UpdateCameraPosition();
-                UpdateCameraAngleMobile();
-            }
-        }
-    }
-
-
-    void UpdateOnComputer()
-    {
-        UpdateCameraAngleComputer();
-        UpdateCameraPosition();
-    }
-    
-
-
     bool IsPointerOverUIObject() {
         //Implementation for mobile
         return EventSystem.current.IsPointerOverGameObject(touch.fingerId);
         //Implementation for computer
         //return EventSystem.current.IsPointerOverGameObject();
+    }
+
+
+    void CenterGameTargetMale()
+    {
+        gameTarget = maleTarget;
+        femaleCharacter.SetActive(false);
+        maleCharacter.SetActive(true);
+
+        Vector3 pos = maleCharacter.transform.position;
+        pos.x = 50;
+        maleCharacter.transform.position = pos;
+    }
+
+
+    void CenterGameTargetFemale()
+    {
+        gameTarget = femaleTarget;
+        maleCharacter.SetActive(false);
+        femaleCharacter.SetActive(true);
+
+        Vector3 pos = femaleCharacter.transform.position;
+        pos.x = 50;
+        femaleCharacter.transform.position = pos;
+    }
+
+
+    public void UpdateTargetPosition()
+    {
+        Vector3 pos = mainCamera.transform.position + GUN_OFFSET * 5.0f * mainCamera.transform.forward;
+        pos.x += 1f;
+        pos.y += 1f;
+        ammo.transform.position = pos;
+
+        Vector3 eulerAngles = mainCamera.transform.eulerAngles;
+        eulerAngles.x -= 2.5f;
+        eulerAngles.y += 2.5f;
+        ammo.transform.eulerAngles = eulerAngles;
     }
 
 
@@ -178,6 +151,27 @@ public class CameraController : MonoBehaviour
     }
 
 
+    void UpdateOnMobile()
+    {
+        totalTouchCount = Mathf.Clamp(Input.touchCount, 1, 2);
+        for (int i = 0; i < totalTouchCount; i++) {
+            touch = Input.GetTouch(i);
+            if (touch.phase == TouchPhase.Moved && !IsPointerOverUIObject()) 
+            {
+                UpdateCameraPosition();
+                UpdateCameraAngleMobile();
+            }
+        }
+    }
+
+
+    void UpdateOnComputer()
+    {
+        UpdateCameraAngleComputer();
+        UpdateCameraPosition();
+    }
+
+
     public void UpdateGunPosition()
     {
         gun.transform.rotation = new Quaternion(0.0f, mainCamera.transform.rotation.y - 90.0f, 0.0f, mainCamera.transform.rotation.w);
@@ -187,19 +181,6 @@ public class CameraController : MonoBehaviour
         eulerAngles.x = 0.0f;
         eulerAngles.y -= 50.0f;
         gun.transform.eulerAngles = eulerAngles;
-    }
-
-    public void UpdateTargetPosition()
-    {
-        Vector3 pos = mainCamera.transform.position + GUN_OFFSET * 5.0f * mainCamera.transform.forward;
-        pos.x += 1f;
-        pos.y += 1f;
-        ammo.transform.position = pos;
-
-        Vector3 eulerAngles = mainCamera.transform.eulerAngles;
-        eulerAngles.x -= 2.5f;
-        eulerAngles.y += 2.5f;
-        ammo.transform.eulerAngles = eulerAngles;
     }
 
 
@@ -217,26 +198,45 @@ public class CameraController : MonoBehaviour
     }
 
 
-    void CenterGameTargetMale()
+    // Start is called before the first frame update
+    void Start()
     {
-        gameTarget = maleTarget;
-        femaleCharacter.SetActive(false);
-        maleCharacter.SetActive(true);
+        //Manually set character type here
+        mainCamera = Camera.main;
+        SetupMainCharacter();
 
-        Vector3 pos = maleCharacter.transform.position;
-        pos.x = 50;
-        maleCharacter.transform.position = pos;
+        UpdateCameraPosition();
+        UpdateGunPosition();
+
+        UpdateCameraAngleMobile();
+        UpdateCameraAngleComputer();
+
+        UpdateTargetPosition();
+
+        //Disable gun for now
+        gun.SetActive(false);
     }
 
 
-    void CenterGameTargetFemale()
+    // Update is called once per frame
+    void Update()
     {
-        gameTarget = femaleTarget;
-        maleCharacter.SetActive(false);
-        femaleCharacter.SetActive(true);
-
-        Vector3 pos = femaleCharacter.transform.position;
-        pos.x = 50;
-        femaleCharacter.transform.position = pos;
+        if (PlayerAlive == true)
+        {
+            if (cameraPerspectiveEnabled) 
+            {
+                if (Input.touchCount > 0)
+                {
+                    UpdateOnMobile();
+                } else if (Input.GetKey(KeyCode.Mouse0))
+                {
+                    UpdateOnComputer();
+                } else
+                {
+                    lastPos = Vector3.zero;
+                    return;
+                }
+            }
+        }
     }
 }

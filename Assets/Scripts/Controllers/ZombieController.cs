@@ -28,56 +28,6 @@ public class ZombieController : MonoBehaviour, IPooledObject
     GameObject healthBar;
 
 
-    public void OnObjectSpawn() {
-        switch (PlayerController.gender)
-        {
-            case CharacterType.MALE:
-                player = male;
-                break;
-            case CharacterType.FEMALE:
-                player = female;
-                break;
-        }
-
-        anim = gameObject.GetComponent<Animation>();
-        
-        controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
-        transform.position = GetRandomPosition();
-        transform.rotation = DEFAULT_ROTATION;
-        health = GetRandomHealth();
-        maxHealth = health;
-
-        if (name == "ZombieLowQuality")
-        {
-            //Out of sight out of mind
-            transform.position = new Vector3(-100.0f, transform.position.y, -100.0f);
-            rootZombie = true;
-        }
-    }
-
-
-    void Update()
-    {
-        if (!rootZombie)
-        {
-            anim.Play("Zombie|Walk");
-
-            if (PastPlayer())
-            {
-                CameraController.PlayerAlive = false;
-            } else
-            {
-                transform.position += speed * transform.forward * Time.deltaTime;
-            }
-
-            if (InRadius())
-            {
-                RotateZombiePlayer();
-            }
-        }
-    }
-
-
     Vector3 GetRandomPosition()
     {
         Vector3 pos = transform.position;
@@ -153,5 +103,55 @@ public class ZombieController : MonoBehaviour, IPooledObject
     public void SetSpeed(float speed)
     {
         this.speed = speed;
+    }
+
+
+    public void OnObjectSpawn() {
+        switch (PlayerController.gender)
+        {
+            case CharacterType.MALE:
+                player = male;
+                break;
+            case CharacterType.FEMALE:
+                player = female;
+                break;
+        }
+
+        anim = gameObject.GetComponent<Animation>();
+        
+        controller = GameObject.Find("Main Camera").GetComponent<CameraController>();
+        transform.position = GetRandomPosition();
+        transform.rotation = DEFAULT_ROTATION;
+        health = GetRandomHealth();
+        maxHealth = health;
+
+        if (name == "ZombieLowQuality")
+        {
+            //Out of sight out of mind
+            transform.position = new Vector3(-100.0f, transform.position.y, -100.0f);
+            rootZombie = true;
+        }
+    }
+
+
+    void Update()
+    {
+        if (!rootZombie)
+        {
+            anim.Play("Zombie|Walk");
+
+            if (PastPlayer())
+            {
+                CameraController.PlayerAlive = false;
+            } else
+            {
+                transform.position += speed * transform.forward * Time.deltaTime;
+            }
+
+            if (InRadius())
+            {
+                RotateZombiePlayer();
+            }
+        }
     }
 }

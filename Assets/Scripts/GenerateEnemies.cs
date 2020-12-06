@@ -29,78 +29,10 @@ public class GenerateEnemies : MonoBehaviour
     //Pooling
     ObjectPooler objectPooler;
 
-    void Start()
-    {
-        objectPooler = ObjectPooler.Instance;
-        StartCoroutine("StartZombieSpawner");
-    }
-
-
-    void Update() 
-    {
-        if (CameraController.PlayerAlive)
-        {
-            if (numberOfZombies == 1 && !beingHandled)
-            {
-                StartCoroutine("StartZombieSpawner");
-            }
-        }
-    }
-
-
-    IEnumerator SpawnZombiesDelay(int iters)
-    {
-        beingHandled = true;
-
-        for (int i = 0; i < iters + 1; i++)
-        {
-            if (i == 0)
-            {
-                Debug.Log("New wave " + maxSpawnTime);
-                yield return new WaitForSeconds(TIME_BETWEEN_WAVES);
-                continue;
-            }
-            AddZombieToGame(i - 1);
-            yield return new WaitForSeconds(RandomNumberSeconds());
-        }
-
-        beingHandled = false;
-    }
-
-
-    void SpawnZombies(int iters)
-    {
-        for (int i = 0; i < iters; i++)
-        {
-            AddZombieToGame(i);
-        }
-    }
-
-
-    void AddZombieToGame(int identifier)
-    {
-        GameObject newZombie = objectPooler.SpawnFromPool("Zombie"); //Instantiate(zombie);
-        newZombie.name = "ZombieLowQuality" + identifier;
-        
-        ZombieController zombieController = newZombie.GetComponent<ZombieController>();
-        zombieController.SetSpeed(GetRandomSpeed());
-
-        numberOfZombies++;
-    }
-
 
     float RandomNumberSeconds()
     {
         return Random.Range(minSpawnTime, maxSpawnTime);
-    }
-
-
-    void StartZombieSpawner()
-    {
-        UpdateSpawnTimes();
-        UpdateSpeeds();
-        UpdateWaveValues();
-        StartCoroutine(SpawnZombiesDelay(currentSpawnValue));
     }
 
 
@@ -136,6 +68,75 @@ public class GenerateEnemies : MonoBehaviour
         if (currentMinSpeed <= MIN_SPEED)
         {
             currentMinSpeed += 1.0f;
+        }
+    }
+
+
+    void AddZombieToGame(int identifier)
+    {
+        GameObject newZombie = objectPooler.SpawnFromPool("Zombie"); //Instantiate(zombie);
+        newZombie.name = "ZombieLowQuality" + identifier;
+        
+        ZombieController zombieController = newZombie.GetComponent<ZombieController>();
+        zombieController.SetSpeed(GetRandomSpeed());
+
+        numberOfZombies++;
+    }
+
+
+    IEnumerator SpawnZombiesDelay(int iters)
+    {
+        beingHandled = true;
+
+        for (int i = 0; i < iters + 1; i++)
+        {
+            if (i == 0)
+            {
+                Debug.Log("New wave " + maxSpawnTime);
+                yield return new WaitForSeconds(TIME_BETWEEN_WAVES);
+                continue;
+            }
+            AddZombieToGame(i - 1);
+            yield return new WaitForSeconds(RandomNumberSeconds());
+        }
+
+        beingHandled = false;
+    }
+
+
+    void SpawnZombies(int iters)
+    {
+        for (int i = 0; i < iters; i++)
+        {
+            AddZombieToGame(i);
+        }
+    }
+
+
+    void StartZombieSpawner()
+    {
+        UpdateSpawnTimes();
+        UpdateSpeeds();
+        UpdateWaveValues();
+        StartCoroutine(SpawnZombiesDelay(currentSpawnValue));
+    }
+
+
+    void Start()
+    {
+        objectPooler = ObjectPooler.Instance;
+        StartCoroutine("StartZombieSpawner");
+    }
+
+
+    void Update() 
+    {
+        if (CameraController.PlayerAlive)
+        {
+            if (numberOfZombies == 1 && !beingHandled)
+            {
+                StartCoroutine("StartZombieSpawner");
+            }
         }
     }
 }
