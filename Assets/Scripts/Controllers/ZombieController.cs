@@ -138,7 +138,8 @@ public class ZombieController : MonoBehaviour, IPooledObject
     {
         if (!rootZombie)
         {
-            anim.Play("Zombie|Walk");
+            //anim.Play("Zombie|Walk");
+            anim.Play("Monsterwithbones|MonsterwithbonesAction");
 
             if (PastPlayer())
             {
