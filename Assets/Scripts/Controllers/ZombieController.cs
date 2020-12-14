@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ZombieController : MonoBehaviour, IPooledObject
+public class ZombieController : MonoBehaviour, IPooledObject, IScorable
 {
     Animation anim;
     CameraController controller;
@@ -26,6 +26,20 @@ public class ZombieController : MonoBehaviour, IPooledObject
     //Health bar
     [SerializeField]
     GameObject healthBar;
+
+
+    //IScorable methods 
+    //TODO -- needs further implementation based on colliders
+    public int CollisionScore(Component collider) {
+        Debug.Log("Collision: " + collider.name);
+        return 50;
+    }
+
+
+    public int EnemyDeathScore(Component collider) {
+        Debug.Log("On Death: " + collider.name);
+        return 100;
+    }
 
 
     Vector3 GetRandomPosition()

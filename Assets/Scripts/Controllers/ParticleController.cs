@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ParticleController : MonoBehaviour
 {
@@ -19,12 +20,16 @@ public class ParticleController : MonoBehaviour
     //Pooling
     ObjectPooler objectPooler;
 
+    //Scoring
+    ScoreController scoreController;
+
 
     void Start()
     {
         objectPooler = ObjectPooler.Instance;
         collisionEvents = new List<ParticleCollisionEvent>();
         enemyGenerator = generatorObject.GetComponent<GenerateEnemies>();
+        scoreController = FindObjectOfType<ScoreController>();
     }
 
 
@@ -37,18 +42,21 @@ public class ParticleController : MonoBehaviour
     }
 
 
-    void TestZombieCollision(GameObject other)
+    void TestZombieCollision(GameObject other, ParticleCollisionEvent collision)
     {
         if (other.name.Contains("ZombieLowQuality"))
         {
             ZombieController zombie = other.GetComponent<ZombieController>();
+            //IScorable zombieScore = zombie.GetComponent<IScorable>();
             zombie.UpdateHealth(50);
 
             if (zombie.GetHealth() <= 0)
             {
-                //Destroy(other);
+                scoreController.Score += zombie.EnemyDeathScore(collision.colliderComponent);
                 objectPooler.ReleaseToPool(other, "Zombie");
                 enemyGenerator.numberOfZombies--;
+            } else { 
+                scoreController.Score += zombie.CollisionScore(collision.colliderComponent);
             }
         }
     }
@@ -61,7 +69,7 @@ public class ParticleController : MonoBehaviour
         for (int i = 0; i < collisionEvents.Count; i++)
         {
             SplatterParticles(collisionEvents[i]);
-            TestZombieCollision(otherObject);
+            TestZombieCollision(otherObject, collisionEvents[i]);
         }
     }
 }
