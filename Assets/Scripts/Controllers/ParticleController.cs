@@ -20,16 +20,13 @@ public class ParticleController : MonoBehaviour
     //Pooling
     ObjectPooler objectPooler;
 
-    //Scoring
-    ScoreController scoreController;
-
 
     void Start()
     {
         objectPooler = ObjectPooler.Instance;
         collisionEvents = new List<ParticleCollisionEvent>();
         enemyGenerator = generatorObject.GetComponent<GenerateEnemies>();
-        scoreController = FindObjectOfType<ScoreController>();
+        CameraController.scoreController = FindObjectOfType<ScoreController>();
     }
 
 
@@ -52,11 +49,11 @@ public class ParticleController : MonoBehaviour
 
             if (zombie.GetHealth() <= 0)
             {
-                scoreController.Score += zombie.EnemyDeathScore(collision.colliderComponent);
+                CameraController.scoreController.Score += zombie.EnemyDeathScore(collision.colliderComponent);
                 objectPooler.ReleaseToPool(other, "Zombie");
                 enemyGenerator.numberOfZombies--;
             } else { 
-                scoreController.Score += zombie.CollisionScore(collision.colliderComponent);
+                CameraController.scoreController.Score += zombie.CollisionScore(collision.colliderComponent);
             }
         }
     }

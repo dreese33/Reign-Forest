@@ -60,6 +60,7 @@ public class CameraController : MonoBehaviour
 
     //Statics
     public static bool PlayerAlive = true;
+    public static ScoreController scoreController;
 
 
     bool IsPointerOverUIObject() {
@@ -204,6 +205,10 @@ public class CameraController : MonoBehaviour
         //Manually set character type here
         mainCamera = Camera.main;
         SetupMainCharacter();
+
+        //Setup score controller
+        scoreController = FindObjectOfType<ScoreController>();
+        scoreController.LoadHighScore();
 
         UpdateCameraPosition();
         UpdateGunPosition();

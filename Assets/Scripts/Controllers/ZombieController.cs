@@ -31,13 +31,13 @@ public class ZombieController : MonoBehaviour, IPooledObject, IScorable
     //IScorable methods 
     //TODO -- needs further implementation based on colliders
     public int CollisionScore(Component collider) {
-        Debug.Log("Collision: " + collider.name);
+        //Debug.Log("Collision: " + collider.name);
         return 50;
     }
 
 
     public int EnemyDeathScore(Component collider) {
-        Debug.Log("On Death: " + collider.name);
+        //Debug.Log("On Death: " + collider.name);
         return 100;
     }
 
