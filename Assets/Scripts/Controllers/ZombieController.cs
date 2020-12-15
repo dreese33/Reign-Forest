@@ -8,9 +8,9 @@ public class ZombieController : MonoBehaviour, IPooledObject, IScorable
     GameObject player;
     float rand;
     int health;
-    private float healthPercent = 1.0f;
-    private float originalScale = 2.0f;
-    private float maxHealth;
+    float healthPercent = 1.0f;
+    float originalScale = 2.0f;
+    float maxHealth;
     bool rootZombie = false;
 
     [SerializeField]
