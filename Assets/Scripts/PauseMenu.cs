@@ -1,24 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : MenuController
 {
-    [SerializeField]
-    Button pauseButton;
-
-    [SerializeField]
-    Button resumeButton;
-
-    [SerializeField]
-    GameObject pauseMenuUI;
-
-    [SerializeField]
-    GameObject gameUI;
-
-    public bool gameIsPaused = false;
-    public Camera menuCamera;
-    public Camera mainCamera;
-
     float distance = 25.0f;
 
 
@@ -51,27 +35,11 @@ public class PauseMenu : MonoBehaviour
             menuCamera.transform.rotation = mainCamera.transform.rotation;
         }
     }
+    
 
-
-    void Resume()
-    {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        gameIsPaused = false;
-
-        menuCamera.depth -= 1;
-        mainCamera.depth += 1;
-        mainCamera.GetComponent<AudioListener>().enabled = true;
-        menuCamera.GetComponent<AudioListener>().enabled = false;
-
-        gameUI.SetActive(true);
-    }
-
-
-    void Start()
+    protected override void Start()
     {
         pauseButton.onClick.AddListener(Pause);
-        resumeButton.onClick.AddListener(Resume);
         pauseMenuUI.SetActive(false);
     }
 }

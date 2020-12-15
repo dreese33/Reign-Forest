@@ -1410,12 +1410,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseButton: {fileID: 320902153}
-  resumeButton: {fileID: 596189122}
   pauseMenuUI: {fileID: 1669378052}
   gameUI: {fileID: 1619069181}
-  gameIsPaused: 0
   menuCamera: {fileID: 168647063}
   mainCamera: {fileID: 963194227}
+  gameIsPaused: 0
 --- !u!1 &451811301
 GameObject:
   m_ObjectHideFlags: 0
@@ -8477,6 +8476,7 @@ GameObject:
   - component: {fileID: 1619069183}
   - component: {fileID: 1619069182}
   - component: {fileID: 1619069186}
+  - component: {fileID: 1619069187}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -8587,6 +8587,24 @@ MonoBehaviour:
   gunsButton: {fileID: 70020197}
   gunsButtonSprite: {fileID: 21300000, guid: c65bc80d90218324eb25b2e87239ab04, type: 3}
   gunsButtonSpriteFlip: {fileID: 21300000, guid: 1b20de1a840f16f419cc82e956980f4f, type: 3}
+--- !u!114 &1619069187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619069181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa6251f7814f7040b901f9f7c518be0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseButton: {fileID: 320902153}
+  pauseMenuUI: {fileID: 1669378052}
+  gameUI: {fileID: 1619069181}
+  menuCamera: {fileID: 168647063}
+  mainCamera: {fileID: 963194227}
+  gameIsPaused: 0
 --- !u!1 &1647040248
 GameObject:
   m_ObjectHideFlags: 0
@@ -8901,6 +8919,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcbf45fc84a1287479c11196e5c54667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseButton: {fileID: 320902153}
+  pauseMenuUI: {fileID: 1669378052}
+  gameUI: {fileID: 1619069181}
+  menuCamera: {fileID: 168647063}
+  mainCamera: {fileID: 963194227}
+  gameIsPaused: 0
+  resumeButton: {fileID: 596189122}
   screenSize: {x: 0, y: 0, z: 0}
 --- !u!1001 &1692108138
 PrefabInstance:
