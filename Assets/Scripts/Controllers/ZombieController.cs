@@ -121,7 +121,7 @@ public class ZombieController : MonoBehaviour, IPooledObject, IScorable
 
 
     public void OnObjectSpawn() {
-        switch (PlayerController.gender)
+        switch (Statics.Gender)
         {
             case CharacterType.MALE:
                 player = male;
@@ -157,7 +157,7 @@ public class ZombieController : MonoBehaviour, IPooledObject, IScorable
 
             if (PastPlayer())
             {
-                CameraController.PlayerAlive = false;
+                Statics.PlayerAlive = false;
             } else
             {
                 transform.position += speed * transform.forward * Time.deltaTime;

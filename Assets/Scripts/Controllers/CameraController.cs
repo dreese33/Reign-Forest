@@ -58,10 +58,6 @@ public class CameraController : MonoBehaviour
     readonly Vector3 OFFSET = new Vector3(0.0f, 0.0f, 3.0f);
     readonly float GUN_OFFSET = 5.0f;
 
-    //Statics
-    public static bool PlayerAlive = true;
-    public static ScoreController scoreController;
-
 
     bool IsPointerOverUIObject() {
         //Implementation for mobile
@@ -187,7 +183,7 @@ public class CameraController : MonoBehaviour
 
     void SetupMainCharacter()
     {
-        switch (PlayerController.gender)
+        switch (Statics.Gender)
         {
             case CharacterType.FEMALE:
                 CenterGameTargetFemale();
@@ -202,13 +198,14 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Starting main controller");
         //Manually set character type here
         mainCamera = Camera.main;
         SetupMainCharacter();
 
         //Setup score controller
-        scoreController = FindObjectOfType<ScoreController>();
-        scoreController.LoadHighScore();
+        Statics.ScoreController = FindObjectOfType<ScoreController>();
+        Statics.ScoreController.LoadHighScore();
 
         UpdateCameraPosition();
         UpdateGunPosition();
@@ -226,7 +223,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerAlive == true)
+        if (Statics.PlayerAlive == true)
         {
             if (cameraPerspectiveEnabled) 
             {

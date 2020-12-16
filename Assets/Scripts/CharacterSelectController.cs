@@ -43,7 +43,7 @@ public class CharacterSelectController : MonoBehaviour
     {
         if (!loading)
         {
-            PlayerController.gender = CharacterType.MALE;
+            Statics.Gender = CharacterType.MALE;
             StartCoroutine(LoadCharacter());
             loading = true;
         }
@@ -54,7 +54,7 @@ public class CharacterSelectController : MonoBehaviour
     {
         if (!loading)
         {
-            PlayerController.gender = CharacterType.FEMALE;
+            Statics.Gender = CharacterType.FEMALE;
             StartCoroutine(LoadCharacter());
             loading = true;
         }

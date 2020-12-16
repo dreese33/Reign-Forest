@@ -22,19 +22,19 @@ public class PauseMenu : MenuController
 
     void UpdateScoreLabel()
     {
-        score.text = CameraController.scoreController.Score.ToString();
+        score.text = Statics.ScoreController.Score.ToString();
     }
 
 
     void UpdateHighScoreLabel()
     {
-        highScore.text = CameraController.scoreController.HighScore.ToString();
+        highScore.text = Statics.ScoreController.HighScore.ToString();
     }
 
     
     void Pause()
     {
-        if (!gameIsPaused)
+        if (!Statics.GameIsPaused)
         {
             gameUI.SetActive(false);
 
@@ -43,7 +43,7 @@ public class PauseMenu : MenuController
 
             pauseMenuUI.SetActive(true);
             Time.timeScale = 0f;
-            gameIsPaused = true;
+            Statics.GameIsPaused = true;
 
             UpdatePauseMenuLocation();
 

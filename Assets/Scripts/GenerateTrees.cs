@@ -31,7 +31,7 @@ public class GenerateTrees : MonoBehaviour
 
     void CharacterSelect()
     {
-        switch (PlayerController.gender)
+        switch (Statics.Gender)
         {
             case CharacterType.MALE:
                 character = GameObject.Find("MaleLowQuality");
@@ -75,7 +75,7 @@ public class GenerateTrees : MonoBehaviour
 
     void Update()
     {
-        if (CameraController.PlayerAlive)
+        if (Statics.PlayerAlive)
         {
             if (character.transform.position.z > treesLeft[backIndex].transform.position.z + 50.0f)
             {

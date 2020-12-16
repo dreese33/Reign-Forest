@@ -162,7 +162,7 @@ public class GenerateEnemies : MonoBehaviour
 
     void Update() 
     {
-        if (CameraController.PlayerAlive)
+        if (Statics.PlayerAlive)
         {
             if (numberOfZombies == 0 && !beingHandled)
             {

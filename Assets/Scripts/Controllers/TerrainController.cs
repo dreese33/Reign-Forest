@@ -5,14 +5,11 @@ public class TerrainController : MonoBehaviour
     [SerializeField]
     Terrain terrain;
 
-    static Terrain terrainObj;
-
     //The total number of terrain objects rendered
     public int terrainCount = 0;
 
     float terrainLength;
     PlayerController player;
-    static bool firstIter = true;
 
 
     float GetPlayerPosition()
@@ -23,9 +20,9 @@ public class TerrainController : MonoBehaviour
 
     void AddTerrain()
     {
-        firstIter = false;
-        terrainObj = Instantiate(terrain, new Vector3(0, 0, 1000), Quaternion.identity);
-        terrainObj.name = "TerrainObj" + terrainCount;
+        Statics.TerrainFirstIter = false;
+        Statics.TerrainObj = Instantiate(terrain, new Vector3(0, 0, 1000), Quaternion.identity);
+        Statics.TerrainObj.name = "TerrainObj" + terrainCount;
         Debug.Log("Another one created");
     }
 
@@ -48,7 +45,7 @@ public class TerrainController : MonoBehaviour
 
     void CreateNewTerrain()
     {
-        if (firstIter)
+        if (Statics.TerrainFirstIter)
         {
             AddTerrain();
         } else

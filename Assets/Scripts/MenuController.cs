@@ -18,8 +18,5 @@ public class MenuController : MonoBehaviour
     [SerializeField]
     protected Camera mainCamera;
 
-    public static bool gameIsPaused = false;
-    public static bool gameSoundsEnabled = true;
-
     protected virtual void Start() {}
 }

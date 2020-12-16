@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MenuController
 {
@@ -20,7 +21,8 @@ public class PauseMenuController : MenuController
 
     void RestartGame()
     {
-        //TODO -- implementation
+        Statics.ResetStatics();
+        SceneManager.LoadScene("CharacterSelect");
     }
 
 
@@ -38,12 +40,12 @@ public class PauseMenuController : MenuController
 
     void UpdateSound()
     {
-        if (gameSoundsEnabled) {
+        if (Statics.GameSoundsEnabled) {
             MuteGame();
-            gameSoundsEnabled = false;
+            Statics.GameSoundsEnabled = false;
         } else {
             UnmuteGame();
-            gameSoundsEnabled = true;
+            Statics.GameSoundsEnabled = true;
         }
     }
 
@@ -58,7 +60,7 @@ public class PauseMenuController : MenuController
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        gameIsPaused = false;
+        Statics.GameIsPaused = false;
 
         menuCamera.depth -= 1;
         mainCamera.depth += 1;

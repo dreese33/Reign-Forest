@@ -18,16 +18,10 @@ public class PlayerController : MonoBehaviour
     public GameObject character;
     public bool forwardPressed = false;
 
-    //This needs to become global or static eventually
-    bool computerMode = false;
-
-    //Statics
-    public static CharacterType gender = CharacterType.FEMALE;
-
 
     void CharacterSelect()
     {
-        switch (PlayerController.gender)
+        switch (Statics.Gender)
         {
             case CharacterType.MALE:
                 character = GameObject.Find("MaleLowQuality");
@@ -43,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     public void BeginForward()
     {
-        if (!computerMode)
+        if (!Statics.ComputerMode)
         {
             forwardPressed = true;
             anim.Stop();
@@ -54,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
     public void EndForward()
     {
-        if (!computerMode)
+        if (!Statics.ComputerMode)
         {
             forwardPressed = false;
             anim.Stop();
@@ -65,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
     void BeginForwardArrow()
     {
-        computerMode = true;
+        Statics.ComputerMode = true;
         if (!forwardPressed)
         {
             forwardButton.interactable = false;
@@ -85,7 +79,7 @@ public class PlayerController : MonoBehaviour
             state = CurrentAnimationState.IDLE;
             forwardPressed = false;
         }
-        computerMode = false;
+        Statics.ComputerMode = false;
     }
 
 
@@ -101,7 +95,7 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        if (CameraController.PlayerAlive) 
+        if (Statics.PlayerAlive) 
         {
             Vector3 pos = character.transform.position;
 
