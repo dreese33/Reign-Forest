@@ -1414,6 +1414,8 @@ MonoBehaviour:
   gameUI: {fileID: 1619069181}
   menuCamera: {fileID: 168647063}
   mainCamera: {fileID: 963194227}
+  score: {fileID: 969445414}
+  highScore: {fileID: 218822713}
 --- !u!1 &451811301
 GameObject:
   m_ObjectHideFlags: 0
@@ -8928,8 +8930,6 @@ MonoBehaviour:
   repeatButton: {fileID: 895400191}
   soundButton: {fileID: 1940526242}
   homeButton: {fileID: 772106743}
-  score: {fileID: 969445414}
-  highScore: {fileID: 218822713}
   screenSize: {x: 0, y: 0, z: 0}
 --- !u!1001 &1692108138
 PrefabInstance:

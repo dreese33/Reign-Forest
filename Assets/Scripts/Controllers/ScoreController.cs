@@ -38,7 +38,8 @@ public class ScoreController : MonoBehaviour
     void UpdateScoreLabel()
     {
         scoreUI.text = _score.ToString();
-        scorePause.text = _score.ToString();
+        //if (scorePause != null)
+            //scorePause.text = _score.ToString();
         HighScore = _score;
     }
 
@@ -47,7 +48,8 @@ public class ScoreController : MonoBehaviour
     {
         PlayerPrefs.SetInt("highscore", _highScore);
         PlayerPrefs.Save();
-        highScorePause.text = _highScore.ToString();
+        //if (highScorePause != null)
+            //highScorePause.text = _highScore.ToString();
     }
 
 

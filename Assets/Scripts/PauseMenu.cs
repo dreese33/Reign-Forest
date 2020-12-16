@@ -3,6 +3,12 @@ using UnityEngine.UI;
 
 public class PauseMenu : MenuController
 {
+    [SerializeField]
+    Text score;
+
+    [SerializeField]
+    Text highScore;
+
     float distance = 25.0f;
 
 
@@ -13,12 +19,27 @@ public class PauseMenu : MenuController
         pauseMenuUI.transform.position = mainCamera.transform.position + mainCamera.transform.forward * distance;
     }
 
+
+    void UpdateScoreLabel()
+    {
+        score.text = CameraController.scoreController.Score.ToString();
+    }
+
+
+    void UpdateHighScoreLabel()
+    {
+        highScore.text = CameraController.scoreController.HighScore.ToString();
+    }
+
     
     void Pause()
     {
         if (!gameIsPaused)
         {
             gameUI.SetActive(false);
+
+            UpdateScoreLabel();
+            UpdateHighScoreLabel();
 
             pauseMenuUI.SetActive(true);
             Time.timeScale = 0f;

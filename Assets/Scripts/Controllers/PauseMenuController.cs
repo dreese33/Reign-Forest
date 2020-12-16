@@ -15,12 +15,6 @@ public class PauseMenuController : MenuController
     [SerializeField]
     Button homeButton;
 
-    [SerializeField]
-    Text score;
-
-    [SerializeField]
-    Text highScore;
-
     public Vector3 screenSize;
 
 
@@ -75,18 +69,6 @@ public class PauseMenuController : MenuController
     }
 
 
-    void UpdateScoreLabel()
-    {
-        score.text = CameraController.scoreController.Score.ToString();
-    }
-
-
-    void UpdateHighScoreLabel()
-    {
-        highScore.text = CameraController.scoreController.HighScore.ToString();
-    }
-
-
     void UpdateCameraForMenu()
     {
         RectTransform rt = GetComponent<RectTransform>();
@@ -100,8 +82,6 @@ public class PauseMenuController : MenuController
 
     protected override void Start()
     {
-        UpdateScoreLabel();
-        UpdateHighScoreLabel();
         UpdateCameraForMenu();
 
         resumeButton.onClick.AddListener(Resume);
