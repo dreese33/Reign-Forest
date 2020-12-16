@@ -21,15 +21,6 @@ public class ParticleController : MonoBehaviour
     ObjectPooler objectPooler;
 
 
-    void Start()
-    {
-        objectPooler = ObjectPooler.Instance;
-        collisionEvents = new List<ParticleCollisionEvent>();
-        enemyGenerator = generatorObject.GetComponent<GenerateEnemies>();
-        CameraController.scoreController = FindObjectOfType<ScoreController>();
-    }
-
-
     void SplatterParticles(ParticleCollisionEvent collisionEvent)
     {
         splatterParticles.transform.position = collisionEvent.intersection;
@@ -44,7 +35,6 @@ public class ParticleController : MonoBehaviour
         if (other.name.Contains("ZombieLowQuality"))
         {
             ZombieController zombie = other.GetComponent<ZombieController>();
-            //IScorable zombieScore = zombie.GetComponent<IScorable>();
             zombie.UpdateHealth(50);
 
             if (zombie.GetHealth() <= 0)
@@ -68,5 +58,14 @@ public class ParticleController : MonoBehaviour
             SplatterParticles(collisionEvents[i]);
             TestZombieCollision(otherObject, collisionEvents[i]);
         }
+    }
+
+
+    void Start()
+    {
+        objectPooler = ObjectPooler.Instance;
+        collisionEvents = new List<ParticleCollisionEvent>();
+        enemyGenerator = generatorObject.GetComponent<GenerateEnemies>();
+        CameraController.scoreController = FindObjectOfType<ScoreController>();
     }
 }
