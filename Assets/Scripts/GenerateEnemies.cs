@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GenerateEnemies : MonoBehaviour
 {
     //Replace with pooling later
     [SerializeField]
     GameObject zombie;
+
+    [SerializeField]
+    Text waveLabel;
 
     int currentSpawnValue = 20;
     bool beingHandled = false;
@@ -17,7 +21,7 @@ public class GenerateEnemies : MonoBehaviour
     float currentMaxSpeed = 15.0f;
 
     public int numberOfZombies = 0;
-    public int wave = 1;
+    public int wave = 0;
 
     //Constants
     readonly float SMALLEST_MAX_SPAWN_TIME = 0.5f;
@@ -52,9 +56,35 @@ public class GenerateEnemies : MonoBehaviour
     }
 
 
+    IEnumerator FadeWaveText()
+    {
+        float t = TIME_BETWEEN_WAVES / 2.0f;
+        waveLabel.color = new Color(waveLabel.color.r, waveLabel.color.g, waveLabel.color.b, 0);
+        waveLabel.text = "Wave " + wave.ToString();
+        waveLabel.gameObject.SetActive(true);
+
+        while (waveLabel.color.a < 1.0f)
+        {
+            waveLabel.color = new Color(waveLabel.color.r, waveLabel.color.g, waveLabel.color.b, waveLabel.color.a + (Time.deltaTime / (t - 1)));
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        while (waveLabel.color.a > 0.0f)
+        {
+            waveLabel.color = new Color(waveLabel.color.r, waveLabel.color.g, waveLabel.color.b, waveLabel.color.a - (Time.deltaTime / t));
+            yield return null;
+        }
+
+        waveLabel.gameObject.SetActive(false);
+    }
+
+
     void UpdateWaveValues()
     {
         wave += 1;
+        StartCoroutine("FadeWaveText");
     }
 
 
@@ -113,6 +143,7 @@ public class GenerateEnemies : MonoBehaviour
     }
 
 
+    //Called every new wave
     void StartZombieSpawner()
     {
         UpdateSpawnTimes();
@@ -133,7 +164,7 @@ public class GenerateEnemies : MonoBehaviour
     {
         if (CameraController.PlayerAlive)
         {
-            if (numberOfZombies == 1 && !beingHandled)
+            if (numberOfZombies == 0 && !beingHandled)
             {
                 StartCoroutine("StartZombieSpawner");
             }
