@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     Vector3 mousePos;
     Vector3 lastPos = Vector3.zero;
 
+    PauseMenuController pauseMenuController;
     Touch touch;
     int totalTouchCount;
 
@@ -217,6 +218,14 @@ public class CameraController : MonoBehaviour
 
         //Disable gun for now
         gun.SetActive(false);
+
+        //Start game sounds
+        pauseMenuController = FindObjectOfType<PauseMenuController>();
+        if (Statics.GameSoundsEnabled) {
+            pauseMenuController.UnmuteGame();
+        } else {
+            pauseMenuController.MuteGame();
+        }
     }
 
 

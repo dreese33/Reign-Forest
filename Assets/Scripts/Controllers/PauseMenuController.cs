@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -11,10 +12,13 @@ public class PauseMenuController : MenuController
     Button repeatButton;
 
     [SerializeField]
+    Button homeButton;
+
+    [SerializeField]
     Button soundButton;
 
     [SerializeField]
-    Button homeButton;
+    Button noSoundButton;
 
     public Vector3 screenSize;
 
@@ -26,27 +30,22 @@ public class PauseMenuController : MenuController
     }
 
 
-    void MuteGame()
+    public void MuteGame()
     {
-        //TODO -- Implementation
+        Statics.GameSoundsEnabled = false;
+        AudioListener.pause = true;
+        soundButton.gameObject.SetActive(false);
+        noSoundButton.gameObject.SetActive(true);
     }
 
 
-    void UnmuteGame()
+    public void UnmuteGame()
     {
-        //TODO -- Implementation
-    }
-
-
-    void UpdateSound()
-    {
-        if (Statics.GameSoundsEnabled) {
-            MuteGame();
-            Statics.GameSoundsEnabled = false;
-        } else {
-            UnmuteGame();
-            Statics.GameSoundsEnabled = true;
-        }
+        Debug.Log("Game unmuted");
+        Statics.GameSoundsEnabled = true;
+        AudioListener.pause = false;
+        soundButton.gameObject.SetActive(true);
+        noSoundButton.gameObject.SetActive(false);
     }
 
 
@@ -86,9 +85,13 @@ public class PauseMenuController : MenuController
     {
         UpdateCameraForMenu();
 
+        //soundButton = GameObject.FindGameObjectWithTag("Sound").GetComponent<Button>();
+        //noSoundButton = GameObject.FindGameObjectWithTag("No-Sound").GetComponent<Button>();
+
         resumeButton.onClick.AddListener(Resume);
         repeatButton.onClick.AddListener(RestartGame);
-        soundButton.onClick.AddListener(UpdateSound);
+        soundButton.onClick.AddListener(MuteGame);
+        noSoundButton.onClick.AddListener(UnmuteGame);
         homeButton.onClick.AddListener(ExitGame);
     }
 }

@@ -14,7 +14,9 @@ public static class Statics {
 
     public static void ResetStatics()
     {
+        //Important game statics
         Time.timeScale = 1;
+
         PlayerAlive = true;
         ScoreController = null;
         ComputerMode = false;
