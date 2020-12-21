@@ -8816,6 +8816,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d3c567feab6fa4ab3208e8345b4354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunsButton: {fileID: 70020197}
+  fireButton: {fileID: 1647040251}
+  target: {fileID: 1077143648}
+  forwardButton: {fileID: 1398098471}
+  pauseButton: {fileID: 320902153}
+  score: {fileID: 770776554}
+  wave: {fileID: 1592710417}
 --- !u!4 &1600237106
 Transform:
   m_ObjectHideFlags: 0

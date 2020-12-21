@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public static class Statics {
 
@@ -7,10 +6,10 @@ public static class Statics {
     public static bool PlayerAlive {
         get => _playerAlive;
         set {
+            _playerAlive = value;
             if (!value) {
                 PlayerDied();
             }
-            _playerAlive = value;
         }
     }
 

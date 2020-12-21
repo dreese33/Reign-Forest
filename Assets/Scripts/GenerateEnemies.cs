@@ -9,7 +9,7 @@ public class GenerateEnemies : MonoBehaviour
     GameObject zombie;
 
     [SerializeField]
-    Text waveLabel;
+    public Text waveLabel;
 
     int currentSpawnValue = 20;
     bool beingHandled = false;
@@ -56,11 +56,18 @@ public class GenerateEnemies : MonoBehaviour
     }
 
 
-    IEnumerator FadeWaveText()
+    public IEnumerator FadeIn()
     {
+        if (Statics.PlayerAlive) {
+            waveLabel.text = "Wave " + wave.ToString();
+            Debug.Log("Lived");
+        } else {
+            waveLabel.text = "You Died!";
+            Debug.Log("Died");
+        }
+
         float t = TIME_BETWEEN_WAVES / 2.0f;
         waveLabel.color = new Color(waveLabel.color.r, waveLabel.color.g, waveLabel.color.b, 0);
-        waveLabel.text = "Wave " + wave.ToString();
         waveLabel.gameObject.SetActive(true);
 
         while (waveLabel.color.a < 1.0f)
@@ -70,7 +77,12 @@ public class GenerateEnemies : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1.0f);
+    }
 
+
+    public IEnumerator FadeOut()
+    {
+        float t = TIME_BETWEEN_WAVES / 2.0f;
         while (waveLabel.color.a > 0.0f)
         {
             waveLabel.color = new Color(waveLabel.color.r, waveLabel.color.g, waveLabel.color.b, waveLabel.color.a - (Time.deltaTime / t));
@@ -81,10 +93,18 @@ public class GenerateEnemies : MonoBehaviour
     }
 
 
+    public IEnumerator FadeWaveText()
+    {
+        StartCoroutine(FadeIn());
+        StartCoroutine(FadeOut());
+        yield return null;
+    }
+
+
     void UpdateWaveValues()
     {
         wave += 1;
-        StartCoroutine("FadeWaveText");
+        StartCoroutine(FadeWaveText());
     }
 
 
