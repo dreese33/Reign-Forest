@@ -2,8 +2,8 @@ using UnityEngine;
 
 
 interface IScorable {
-    int CollisionScore(Component collider);
-    int EnemyDeathScore(Component collider);
+    int CollisionScore(ZombieCollider collider);
+    int EnemyDeathScore(ZombieCollider collider);
     int GetHealth();
-    void UpdateHealth(int damage);
+    void UpdateHealth(ZombieCollider collider);
 }

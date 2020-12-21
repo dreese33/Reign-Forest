@@ -21,24 +21,61 @@ public class ZombieController : MonoBehaviour, IPooledObject, IScorable
 
     //Constants
     readonly float ROTATE_SPEED = 20.0f;
-    private readonly Quaternion DEFAULT_ROTATION = new Quaternion(0.0f, 180.0f, 0.0f, 1.0f);
+    readonly Quaternion DEFAULT_ROTATION = new Quaternion(0.0f, 180.0f, 0.0f, 1.0f);
+    readonly int MAX_ZOMBIE_HEALTH = 1000;
 
     //Health bar
     [SerializeField]
     GameObject healthBar;
 
 
-    //IScorable methods 
-    //TODO -- needs further implementation based on colliders
-    public int CollisionScore(Component collider) {
-        //Debug.Log("Collision: " + collider.name);
-        return 50;
+    public ZombieCollider GetZombieCollider(string name) {
+        switch (name) {
+        case "spine_02":
+            return ZombieCollider.SPINE_02;
+        case "upperarm_l":
+            return ZombieCollider.UPPERARM_L;
+        case "upperarm_r":
+            return ZombieCollider.UPPERARM_R;
+        case "head":
+            return ZombieCollider.HEAD;
+        case "thigh_l":
+            return ZombieCollider.THIGH_L;
+        case "calf_l":
+            return ZombieCollider.CALF_L;
+        case "thigh_r":
+            return ZombieCollider.THIGH_R;
+        case "calf_r":
+            return ZombieCollider.CALF_R;
+        default:
+            throw new ZombieColliderNotFoundException();
+        }
     }
 
 
-    public int EnemyDeathScore(Component collider) {
-        //Debug.Log("On Death: " + collider.name);
-        return 100;
+    //IScorable methods 
+    public int CollisionScore(ZombieCollider collider) {
+        switch (collider) {
+        case ZombieCollider.SPINE_02:
+            return 50;
+        default:
+            return 25;
+        }
+    }
+
+
+    /*
+        Score to add to players score
+    */
+    public int EnemyDeathScore(ZombieCollider collider) {
+        switch (collider) {
+        case ZombieCollider.HEAD:
+            return 100;
+        case ZombieCollider.SPINE_02:
+            return 50;
+        default:
+            return 25;
+        }
     }
 
 
@@ -94,14 +131,23 @@ public class ZombieController : MonoBehaviour, IPooledObject, IScorable
     }
 
 
-    public void UpdateHealth(int damage)
+    public void UpdateHealth(ZombieCollider collider)
     {
         //Update health values
-        health -= damage;
+        switch (collider) {
+        case ZombieCollider.HEAD:
+            health -= MAX_ZOMBIE_HEALTH;
+            break;
+        case ZombieCollider.SPINE_02:
+            health -= 60;
+            break;
+        default:
+            health -= 30;
+            break;
+        }
+
         healthPercent = health / maxHealth;
 
-        //Update health bar
-        //healthBar.GetComponent<Renderer>().material.SetFloat("_Percent", healthPercent);
         Vector3 scale = healthBar.transform.localScale;
         scale.x = healthPercent * originalScale;
         healthBar.transform.localScale = scale;

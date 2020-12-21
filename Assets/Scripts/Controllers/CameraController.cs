@@ -12,6 +12,7 @@ public class CameraController : MonoBehaviour
 
     Vector3 mousePos;
     Vector3 lastPos = Vector3.zero;
+    string[] zombieColliders;
 
     PauseMenuController pauseMenuController;
     Touch touch;
@@ -41,10 +42,8 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     Transform maleTarget;
 
-    [SerializeField]
     Transform gameTarget;
 
-    [SerializeField]
     Camera mainCamera;
 
     [SerializeField]
@@ -53,11 +52,24 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     GameObject ammo;
 
+    [SerializeField]
+    GameObject zombie;
+
     public bool cameraPerspectiveEnabled = true;
 
     //Constants
     readonly Vector3 OFFSET = new Vector3(0.0f, 0.0f, 3.0f);
     readonly float GUN_OFFSET = 5.0f;
+
+
+    //Called once in the beginning of the game
+    void LoadZombieColliders() {
+        Collider[] colliders = zombie.GetComponentsInChildren<Collider>();
+        zombieColliders = new string[colliders.Length];
+        for (int i = 0; i < colliders.Length; i++) {
+            zombieColliders[i] = colliders[i].name;
+        }
+    }
 
 
     bool IsPointerOverUIObject() {
@@ -226,6 +238,10 @@ public class CameraController : MonoBehaviour
         } else {
             pauseMenuController.MuteGame();
         }
+
+        //Convert this to a unit test to confirm that the 
+        //zombies colliders are actually being loaded properly
+        LoadZombieColliders();
     }
 
 

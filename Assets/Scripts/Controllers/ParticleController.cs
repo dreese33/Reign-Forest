@@ -35,15 +35,16 @@ public class ParticleController : MonoBehaviour
         if (other.name.Contains("ZombieLowQuality"))
         {
             ZombieController zombie = other.GetComponent<ZombieController>();
-            zombie.UpdateHealth(50);
+            ZombieCollider collider = zombie.GetZombieCollider(collision.colliderComponent.name);
+            zombie.UpdateHealth(collider);
 
             if (zombie.GetHealth() <= 0)
             {
-                Statics.ScoreController.Score += zombie.EnemyDeathScore(collision.colliderComponent);
+                Statics.ScoreController.Score += zombie.EnemyDeathScore(collider);
                 objectPooler.ReleaseToPool(other, "Zombie");
                 enemyGenerator.numberOfZombies--;
-            } else { 
-                Statics.ScoreController.Score += zombie.CollisionScore(collision.colliderComponent);
+            } else {
+                Statics.ScoreController.Score += zombie.CollisionScore(collider);
             }
         }
     }
