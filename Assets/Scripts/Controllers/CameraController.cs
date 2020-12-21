@@ -220,6 +220,8 @@ public class CameraController : MonoBehaviour
         Statics.ScoreController = FindObjectOfType<ScoreController>();
         Statics.ScoreController.LoadHighScore();
 
+        Statics.DeathController = FindObjectOfType<DeathController>();
+
         UpdateCameraPosition();
         UpdateGunPosition();
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class Statics {
 
@@ -13,6 +14,7 @@ public static class Statics {
         }
     }
 
+    public static DeathController DeathController;
     public static ScoreController ScoreController;
     public static bool ComputerMode = false;
 
@@ -28,18 +30,20 @@ public static class Statics {
         //Important game statics
         Time.timeScale = 1;
 
-        PlayerAlive = true;
+        TerrainObj = null;
         ScoreController = null;
+        DeathController = null;
+
         ComputerMode = false;
         Gender = CharacterType.FEMALE;
         TerrainFirstIter = true;
-        TerrainObj = null;    //This one may cause errors
         GameIsPaused = false;
-        GameSoundsEnabled = true;
+        GameSoundsEnabled = true;  //Reload from stored preferences
+        PlayerAlive = true;
     }
 
 
     private static void PlayerDied() {
-        Debug.Log("Player Died");
+        DeathController.PlayerDied();
     }
 }
