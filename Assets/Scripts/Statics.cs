@@ -1,7 +1,18 @@
 using UnityEngine;
 
 public static class Statics {
-    public static bool PlayerAlive = true;
+
+    private static bool _playerAlive = true;
+    public static bool PlayerAlive {
+        get => _playerAlive;
+        set {
+            if (!value) {
+                PlayerDied();
+            }
+            _playerAlive = value;
+        }
+    }
+
     public static ScoreController ScoreController;
     public static bool ComputerMode = false;
 
@@ -25,5 +36,10 @@ public static class Statics {
         TerrainObj = null;    //This one may cause errors
         GameIsPaused = false;
         GameSoundsEnabled = true;
+    }
+
+
+    private static void PlayerDied() {
+        Debug.Log("Player Died");
     }
 }

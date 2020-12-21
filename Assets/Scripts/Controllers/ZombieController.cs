@@ -96,6 +96,9 @@ public class ZombieController : MonoBehaviour, IPooledObject, IScorable
     }
 
 
+    /*
+        Detects player death
+    */
     bool PastPlayer()
     {
         return (transform.position.z - player.transform.position.z) < 15.0f;
@@ -194,16 +197,22 @@ public class ZombieController : MonoBehaviour, IPooledObject, IScorable
     }
 
 
+    /*
+        This is where player death occurrs. Does not check
+        whether player is alive or not
+    */
     void Update()
     {
         if (!rootZombie)
         {
-            //anim.Play("Zombie|Walk");
             anim.Play("Monsterwithbones|MonsterwithbonesAction");
 
             if (PastPlayer())
             {
-                Statics.PlayerAlive = false;
+                //Death here
+                if (Statics.PlayerAlive) {
+                    Statics.PlayerAlive = false;
+                }
             } else
             {
                 transform.position += speed * transform.forward * Time.deltaTime;
